@@ -150,9 +150,12 @@ class GameBoyAdvance {
 		this.cpu.resetCPU(0);
 	}
 	step() {
-		while (this.doStep()) {
+		// The normal frame mode always waits for VBlank. Inline that hot loop
+		// instead of calling doStep()/waitFrame() once for every CPU instruction.
+		while (!this.seenFrame) {
 			this.cpu.step();
 		}
+		this.seenFrame = false;
 	}
 	waitFrame() {
 		var seen = this.seenFrame;
