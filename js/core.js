@@ -91,6 +91,7 @@ class ARMCore {
 
 		var gprs = this.gprs;
 		var mmu = this.mmu;
+		var irq = this.irq;
 		this.step = function () {
 			var instruction =
 				this.instruction ||
@@ -142,8 +143,8 @@ class ARMCore {
 					this.instruction = null;
 				}
 			}
-			if (this.cycles >= this.irq.nextEvent) {
-				this.irq.updateTimers();
+			if (this.cycles >= irq.nextEvent) {
+				irq.updateTimers();
 			}
 		};
 	}
