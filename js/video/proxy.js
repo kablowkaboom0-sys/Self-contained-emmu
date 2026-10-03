@@ -78,8 +78,6 @@ class GameBoyAdvanceRenderProxy {
 		this.worker = new Worker('js/video/worker.js');
 
 		this.currentFrame = 0;
-		this.delay = 0;
-		this.skipFrame = false;
 
 		this.dirty = null;
 		var self = this;
@@ -253,8 +251,7 @@ class GameBoyAdvanceRenderProxy {
 		this.worker.postMessage({ type: 'start', backing: this.backing });
 	}
 	drawScanline(y) {
-		if (!this.skipFrame) {
-			if (this.dirty) {
+		if (this.dirty) {
 				if (this.dirty.memory) {
 					if (this.dirty.memory.palette) {
 						this.dirty.memory.palette = this.dirty.memory.palette.slice(0);
@@ -277,17 +274,10 @@ class GameBoyAdvanceRenderProxy {
 	}
 	startDraw() {
 		++this.currentFrame;
-		if (this.delay <= 0) {
-			this.skipFrame = false;
-		}
-		if (!this.skipFrame) {
-			++this.delay;
-		}
 	}
 	finishDraw(caller) {
 		this.caller = caller;
-		if (!this.skipFrame) {
-			var message = {
+		var message = {
 				type: 'finish',
 				scanlines: this.scanlineQueue,
 				frame: this.currentFrame
@@ -318,6 +308,5 @@ class GameBoyAdvanceRenderProxy {
 			if (this.delay > 2) {
 				this.skipFrame = true;
 			}
-		}
 	}
 };
