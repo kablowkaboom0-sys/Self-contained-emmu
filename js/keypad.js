@@ -46,13 +46,13 @@ class GameBoyAdvanceKeypad {
 
 		// Check for a remapping
 		if (this.remappingKeyId != "") {
-			this.remapKeycode(this.remappingKeyId, e.keyCode);
+			this.remapKeycode(this.remappingKeyId, e.keyCode || e.which);
 			this.remappingKeyId = "";
 			e.preventDefault();
 			return; // Could do an else and wrap the rest of the function in it, but this is cleaner
 		}
 
-		switch (e.keyCode) {
+		var code=e.keyCode;\n\t\tif (!code) {\n\t\t\tswitch (e.key) {\n\t\t\t\tcase "ArrowLeft": code=this.KEYCODE_LEFT; break;\n\t\t\t\tcase "ArrowUp": code=this.KEYCODE_UP; break;\n\t\t\t\tcase "ArrowRight": code=this.KEYCODE_RIGHT; break;\n\t\t\t\tcase "ArrowDown": code=this.KEYCODE_DOWN; break;\n\t\t\t\tcase "Enter": code=this.KEYCODE_START; break;\n\t\t\t\tcase "z": case "Z": code=this.KEYCODE_A; break;\n\t\t\t\tcase "x": case "X": code=this.KEYCODE_B; break;\n\t\t\t\tcase "a": case "A": code=this.KEYCODE_L; break;\n\t\t\t\tcase "s": case "S": code=this.KEYCODE_R; break;\n\t\t\t\tcase "\\\\": code=this.KEYCODE_SELECT; break;\n\t\t\t}\n\t\t}\n\n\t\tswitch (code) {
 			case this.KEYCODE_START:
 				toggle = this.START;
 				break;
