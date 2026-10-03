@@ -21,6 +21,7 @@ class GameBoyAdvance {
 		this.keypad = new GameBoyAdvanceKeypad();
 		this.sio = new GameBoyAdvanceSIO();
 
+		// TODO: simplify this graph
 		this.cpu.mmu = this.mmu;
 		this.cpu.irq = this.irq;
 
@@ -59,9 +60,8 @@ class GameBoyAdvance {
 		this.lastVblank = 0;
 
 		this.queue = null;
-		this.running = false;
 		this.reportFPS = null;
-		this.throttle = 16;
+		this.throttle = 16; // This is rough, but the 2/3ms difference gives us a good overhead
 
 		var self = this;
 		window.queueFrame = function (f) {
@@ -129,13 +129,6 @@ class GameBoyAdvance {
 		reader.readAsArrayBuffer(romFile);
 	}
 	reset() {
-		// Stop any previous emulation loop before rebuilding the machine state.
-		this.paused = true;
-		this.running = false;
-		if (this.queue) {
-			clearTimeout(this.queue);
-			this.queue = null;
-		}
 		this.audio.pause(true);
 
 		this.mmu.clear();
@@ -166,7 +159,6 @@ class GameBoyAdvance {
 	}
 	pause() {
 		this.paused = true;
-		this.running = false;
 		this.audio.pause(true);
 		if (this.queue) {
 			clearTimeout(this.queue);
@@ -188,10 +180,9 @@ class GameBoyAdvance {
 		}
 	}
 	runStable() {
-		if (this.running) {
+		if (this.interval) {
 			return; // Already running
 		}
-		this.running = true;
 		var self = this;
 		var timer = 0;
 		var frames = 0;
@@ -282,6 +273,7 @@ class GameBoyAdvance {
 				view[i++] = s.charCodeAt(1);
 			}
 		}
+
 		return buffer;
 	}
 	encodeBase64(view) {
