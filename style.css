@@ -85,3 +85,6 @@
   .game-fallback-active .ab button{width:58px!important;height:58px!important;min-height:58px!important}
   .game-fallback-active .dpad{grid-template-columns:repeat(3,44px)!important;grid-template-rows:repeat(3,44px)!important}
 }
+
+.exit-game-fullscreen{display:none}
+.game-fallback-active .exit-game-fullscreen.show{display:block!important;position:fixed!important;top:10px!important;left:10px!important;z-index:50!important;margin:0!important;padding:8px 12px!important;background:rgba(25,25,25,.88)!important;border:2px solid rgba(255,255,255,.7)!important;border-radius:8px!important;color:#fff!important;font-weight:700!important}
