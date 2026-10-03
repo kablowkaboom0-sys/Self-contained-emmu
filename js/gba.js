@@ -187,7 +187,6 @@ class GameBoyAdvance {
 		var timer = 0;
 		var frames = 0;
 		var runFunc;
-		var lastFrame = (window.performance && performance.now) ? performance.now() : Date.now();
 		var frameLength = 1000 / 59.7275;
 		this.paused = false;
 		this.audio.pause(false);
@@ -197,17 +196,14 @@ class GameBoyAdvance {
 				if (self.paused) {
 					return;
 				}
-				var now = (window.performance && performance.now) ? performance.now() : Date.now();
-				var elapsed = now - lastFrame;
-				if (elapsed < frameLength) {
-					queueFrame(runFunc);
-					return;
-				}
-				lastFrame = now;
+				var start = (window.performance && performance.now) ? performance.now() : Date.now();
 				self.advanceFrame();
+				var end = (window.performance && performance.now) ? performance.now() : Date.now();
+				var workTime = end - start;
+				self.throttle = Math.max(0, frameLength - workTime);
 				++frames;
 				if (self.reportFPS) {
-					timer += elapsed;
+					timer += workTime + self.throttle;
 					if (frames == 60) {
 						self.reportFPS((frames * 1000) / timer);
 						frames = 0;
