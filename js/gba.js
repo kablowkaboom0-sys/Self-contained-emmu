@@ -187,53 +187,42 @@ class GameBoyAdvance {
 		var timer = 0;
 		var frames = 0;
 		var runFunc;
-		var start = Date.now();
+		var lastFrame = (window.performance && performance.now) ? performance.now() : Date.now();
+		var frameLength = 1000 / 59.7275;
 		this.paused = false;
 		this.audio.pause(false);
 
-		if (this.reportFPS) {
-			runFunc = function () {
-				try {
-					timer += Date.now() - start;
-					if (self.paused) {
-						return;
-					} else {
-						queueFrame(runFunc);
-					}
-					start = Date.now();
-					self.advanceFrame();
-					++frames;
+		runFunc = function () {
+			try {
+				if (self.paused) {
+					return;
+				}
+				var now = (window.performance && performance.now) ? performance.now() : Date.now();
+				var elapsed = now - lastFrame;
+				if (elapsed < frameLength) {
+					queueFrame(runFunc);
+					return;
+				}
+				lastFrame = now;
+				self.advanceFrame();
+				++frames;
+				if (self.reportFPS) {
+					timer += elapsed;
 					if (frames == 60) {
 						self.reportFPS((frames * 1000) / timer);
 						frames = 0;
 						timer = 0;
 					}
-				} catch (exception) {
-					self.ERROR(exception);
-					if (exception.stack) {
-						self.logStackTrace(exception.stack.split("\n"));
-					}
-					throw exception;
 				}
-			};
-		} else {
-			runFunc = function () {
-				try {
-					if (self.paused) {
-						return;
-					} else {
-						queueFrame(runFunc);
-					}
-					self.advanceFrame();
-				} catch (exception) {
-					self.ERROR(exception);
-					if (exception.stack) {
-						self.logStackTrace(exception.stack.split("\n"));
-					}
-					throw exception;
+				queueFrame(runFunc);
+			} catch (exception) {
+				self.ERROR(exception);
+				if (exception.stack) {
+					self.logStackTrace(exception.stack.split("\n"));
 				}
-			};
-		}
+				throw exception;
+			}
+		};
 		queueFrame(runFunc);
 	}
 	setSavedata(data) {
