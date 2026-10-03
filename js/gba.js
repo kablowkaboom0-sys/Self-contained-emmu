@@ -192,30 +192,28 @@ class GameBoyAdvance {
 		var self = this;
 		var frameLength = 1000 / 59.7275;
 		var nextFrame = 0;
-		var raf = window.requestAnimationFrame || function (f) {
-			return window.setTimeout(function () { f(Date.now()); }, 16);
-		};
 		this.paused = false;
 		this.audio.pause(false);
-		var runFunc = function (timestamp) {
+		var runFunc = function () {
 			try {
 				if (self.paused) return;
-				if (!nextFrame) nextFrame = timestamp;
-				if (timestamp + 0.25 >= nextFrame) {
-					var start = (window.performance && performance.now) ? performance.now() : Date.now();
+				var now = (window.performance && performance.now) ? performance.now() : Date.now();
+				if (!nextFrame) nextFrame = now;
+				if (now >= nextFrame) {
 					self.advanceFrame();
 					var end = (window.performance && performance.now) ? performance.now() : Date.now();
 					nextFrame += frameLength;
 					if (nextFrame < end) nextFrame = end;
 				}
-				self.queue = raf(runFunc);
+				var delay = Math.max(0, nextFrame - ((window.performance && performance.now) ? performance.now() : Date.now()));
+				self.queue = window.setTimeout(runFunc, delay);
 			} catch (exception) {
 				self.ERROR(exception);
 				if (exception.stack) self.logStackTrace(exception.stack.split("\n"));
 				throw exception;
 			}
 		};
-		self.queue = raf(runFunc);
+		self.queue = window.setTimeout(runFunc, 0);
 	}
 
 	setSavedata(data) {
