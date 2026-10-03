@@ -75,7 +75,7 @@ class GameBoyAdvance {
 		};
 	}
 	setCanvas(canvas) {
-		if (canvas.offsetWidth != 240 || canvas.offsetHeight != 160) {
+		if (canvas.width != 240 || canvas.height != 160) {
 			var self = this;
 			this.indirectCanvas = document.createElement("canvas");
 			this.indirectCanvas.setAttribute("height", "160");
