@@ -129,6 +129,13 @@ class GameBoyAdvance {
 		reader.readAsArrayBuffer(romFile);
 	}
 	reset() {
+		// Stop any previous emulation loop before rebuilding the machine state.
+		this.paused = true;
+		this.running = false;
+		if (this.queue) {
+			clearTimeout(this.queue);
+			this.queue = null;
+		}
 		this.audio.pause(true);
 
 		this.mmu.clear();
