@@ -184,43 +184,34 @@ class GameBoyAdvance {
 			return; // Already running
 		}
 		var self = this;
-		var timer = 0;
-		var frames = 0;
-		var runFunc;
 		var frameLength = 1000 / 59.7275;
+		var nextFrame = 0;
+		var raf = window.requestAnimationFrame || function (f) {
+			return window.setTimeout(function () { f(Date.now()); }, 16);
+		};
 		this.paused = false;
 		this.audio.pause(false);
-
-		runFunc = function () {
+		var runFunc = function (timestamp) {
 			try {
-				if (self.paused) {
-					return;
+				if (self.paused) return;
+				if (!nextFrame) nextFrame = timestamp;
+				if (timestamp + 0.25 >= nextFrame) {
+					var start = (window.performance && performance.now) ? performance.now() : Date.now();
+					self.advanceFrame();
+					var end = (window.performance && performance.now) ? performance.now() : Date.now();
+					nextFrame += frameLength;
+					if (nextFrame < end) nextFrame = end;
 				}
-				var start = (window.performance && performance.now) ? performance.now() : Date.now();
-				self.advanceFrame();
-				var end = (window.performance && performance.now) ? performance.now() : Date.now();
-				var workTime = end - start;
-				self.throttle = Math.max(0, frameLength - workTime);
-				++frames;
-				if (self.reportFPS) {
-					timer += workTime + self.throttle;
-					if (frames == 60) {
-						self.reportFPS((frames * 1000) / timer);
-						frames = 0;
-						timer = 0;
-					}
-				}
-				queueFrame(runFunc);
+				self.queue = raf(runFunc);
 			} catch (exception) {
 				self.ERROR(exception);
-				if (exception.stack) {
-					self.logStackTrace(exception.stack.split("\n"));
-				}
+				if (exception.stack) self.logStackTrace(exception.stack.split("\n"));
 				throw exception;
 			}
 		};
-		queueFrame(runFunc);
+		self.queue = raf(runFunc);
 	}
+
 	setSavedata(data) {
 		this.mmu.loadSavedata(data);
 	}
