@@ -59,6 +59,7 @@ class GameBoyAdvance {
 		this.lastVblank = 0;
 
 		this.queue = null;
+		this.running = false;
 		this.reportFPS = null;
 		this.throttle = 16;
 
@@ -158,6 +159,7 @@ class GameBoyAdvance {
 	}
 	pause() {
 		this.paused = true;
+		this.running = false;
 		this.audio.pause(true);
 		if (this.queue) {
 			clearTimeout(this.queue);
@@ -179,9 +181,10 @@ class GameBoyAdvance {
 		}
 	}
 	runStable() {
-		if (this.interval) {
+		if (this.running) {
 			return; // Already running
 		}
+		this.running = true;
 		var self = this;
 		var timer = 0;
 		var frames = 0;
