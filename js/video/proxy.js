@@ -86,6 +86,10 @@ class GameBoyAdvanceRenderProxy {
 		var handlers = {
 			finish: function (data) {
 				self.backing = data.backing;
+				if (self.renderStart && self.caller && self.caller.core) {
+					var now = (window.performance && performance.now) ? performance.now() : Date.now();
+					self.caller.core.debugVideoTime = now - self.renderStart;
+				}
 				self.caller.finishDraw(self.backing);
 				--self.delay;
 			}
@@ -308,6 +312,7 @@ class GameBoyAdvanceRenderProxy {
 					}
 				}
 			}
+			this.renderStart = (window.performance && performance.now) ? performance.now() : Date.now();
 			this.worker.postMessage(message, transfers);
 			this.scanlineQueue = [];
 			if (this.delay > 2) {
