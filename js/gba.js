@@ -61,6 +61,8 @@ class GameBoyAdvance {
 
 		this.queue = null;
 		this.reportFPS = null;
+		this.debugFrames = 0;
+		this.debugFrameTime = 0;
 		this.throttle = 16; // This is rough, but the 2/3ms difference gives us a good overhead
 
 		var self = this;
@@ -166,7 +168,11 @@ class GameBoyAdvance {
 		}
 	}
 	advanceFrame() {
+		var debugStart = (window.performance && performance.now) ? performance.now() : Date.now();
 		this.step();
+		var debugEnd = (window.performance && performance.now) ? performance.now() : Date.now();
+		this.debugFrames++;
+		this.debugFrameTime = debugEnd - debugStart;
 		if (this.seenSave) {
 			if (!this.mmu.saveNeedsFlush()) {
 				this.storeSavedata();
