@@ -142,7 +142,9 @@ class ARMCore {
 					this.instruction = null;
 				}
 			}
-			this.irq.updateTimers();
+			if (this.cycles >= this.irq.nextEvent) {
+				this.irq.updateTimers();
+			}
 		};
 	}
 	freeze() {
