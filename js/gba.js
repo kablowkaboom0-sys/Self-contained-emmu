@@ -180,79 +180,60 @@ class GameBoyAdvance {
 	}
 	runStable() {
 		if (this.interval) {
-			return;
+			return; // Already running
 		}
 		var self = this;
 		var timer = 0;
 		var frames = 0;
 		var runFunc;
-		var start = performance.now ? performance.now() : Date.now();
-		var nextFrame = start;
-		var frameDuration = 1000 / 59.7275;
+		var start = Date.now();
 		this.paused = false;
 		this.audio.pause(false);
 
-		var scheduleNext = function () {
-			nextFrame += frameDuration;
-			var now = performance.now ? performance.now() : Date.now();
-
-			// Do not accumulate a large backlog if the device falls behind.
-			if (nextFrame < now - frameDuration * 2) {
-				nextFrame = now + frameDuration;
-			}
-
-			self.queue = window.setTimeout(runFunc, Math.max(0, nextFrame - now));
-		};
-
 		if (this.reportFPS) {
 			runFunc = function () {
-			try {
-				var now = performance.now ? performance.now() : Date.now();
-				timer += now - start;
-				start = now;
-
-				if (self.paused) {
-					return;
+				try {
+					timer += Date.now() - start;
+					if (self.paused) {
+						return;
+					} else {
+						queueFrame(runFunc);
+					}
+					start = Date.now();
+					self.advanceFrame();
+					++frames;
+					if (frames == 60) {
+						self.reportFPS((frames * 1000) / timer);
+						frames = 0;
+						timer = 0;
+					}
+				} catch (exception) {
+					self.ERROR(exception);
+					if (exception.stack) {
+						self.logStackTrace(exception.stack.split("\n"));
+					}
+					throw exception;
 				}
-
-				self.advanceFrame();
-				++frames;
-
-				if (frames == 60) {
-					self.reportFPS((frames * 1000) / timer);
-					frames = 0;
-					timer = 0;
-				}
-
-				scheduleNext();
-			} catch (exception) {
-				self.ERROR(exception);
-				if (exception.stack) {
-					self.logStackTrace(exception.stack.split("\n"));
-				}
-				throw exception;
-			}
-		};
+			};
 		} else {
 			runFunc = function () {
-			try {
-				if (self.paused) {
-					return;
+				try {
+					if (self.paused) {
+						return;
+					} else {
+						queueFrame(runFunc);
+					}
+					self.advanceFrame();
+				} catch (exception) {
+					self.ERROR(exception);
+					if (exception.stack) {
+						self.logStackTrace(exception.stack.split("\n"));
+					}
+					throw exception;
 				}
-
-				self.advanceFrame();
-				scheduleNext();
-			} catch (exception) {
-				self.ERROR(exception);
-				if (exception.stack) {
-					self.logStackTrace(exception.stack.split("\n"));
-				}
-				throw exception;
-			}
-		};
+			};
 		}
-
-		self.queue = window.setTimeout(runFunc, 0);
+		queueFrame(runFunc);
 	}
 	setSavedata(data) {
 		this.mmu.loadSavedata(data);
