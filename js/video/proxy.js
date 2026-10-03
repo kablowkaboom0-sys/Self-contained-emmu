@@ -283,7 +283,32 @@ class GameBoyAdvanceRenderProxy {
 	finishDraw(caller) {
 		this.caller = caller;
 		if (!this.skipFrame) {
-			this.worker.postMessage({ type: 'finish', scanlines: this.scanlineQueue, frame: this.currentFrame });
+			var message = {
+				type: 'finish',
+				scanlines: this.scanlineQueue,
+				frame: this.currentFrame
+			};
+			var transfers = [];
+			for (var i = 0; i < this.scanlineQueue.length; ++i) {
+				var dirty = this.scanlineQueue[i].dirty;
+				if (!dirty || !dirty.memory) {
+					continue;
+				}
+				if (dirty.memory.palette) {
+					transfers.push(dirty.memory.palette);
+				}
+				if (dirty.memory.oam) {
+					transfers.push(dirty.memory.oam);
+				}
+				if (dirty.memory.vram) {
+					for (var j = 0; j < dirty.memory.vram.length; ++j) {
+						if (dirty.memory.vram[j]) {
+							transfers.push(dirty.memory.vram[j]);
+						}
+					}
+				}
+			}
+			this.worker.postMessage(message, transfers);
 			this.scanlineQueue = [];
 			if (this.delay > 2) {
 				this.skipFrame = true;
