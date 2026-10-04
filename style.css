@@ -985,3 +985,62 @@
   .mobile-game-active .speed-controls{bottom:10px!important;gap:38px!important}
   .mobile-game-active .speed-controls button{width:66px!important;height:36px!important;min-width:66px!important;min-height:36px!important}
 }
+
+/* Mobile fullscreen mode: fullscreen the player itself so controls remain inside it */
+.player:fullscreen{
+  width:100vw!important;
+  height:100dvh!important;
+  max-width:none!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:#000!important;
+  overflow:hidden!important;
+}
+.player:fullscreen .screen-wrap{
+  position:fixed!important;
+  inset:0!important;
+  width:100vw!important;
+  height:100dvh!important;
+  max-width:none!important;
+  margin:0!important;
+  border:0!important;
+  border-radius:0!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  background:#000!important;
+  z-index:1!important;
+}
+.player:fullscreen .screen-wrap canvas{
+  width:100%!important;
+  height:100%!important;
+  max-width:100vw!important;
+  max-height:100dvh!important;
+  object-fit:contain!important;
+}
+.player:fullscreen .touch-layout{
+  position:fixed!important;
+  inset:0!important;
+  width:100vw!important;
+  height:100dvh!important;
+  z-index:100!important;
+  pointer-events:none!important;
+}
+.player:fullscreen .touch-layout button{pointer-events:auto!important}
+.player:fullscreen .actions,
+.player:fullscreen aside{display:none!important}
+.player:fullscreen .toggle-touch{
+  position:fixed!important;
+  top:10px!important;
+  right:10px!important;
+  z-index:120!important;
+}
+.player:fullscreen .exit-mobile-game-fullscreen.show{
+  display:block!important;
+  position:fixed!important;
+  top:10px!important;
+  left:10px!important;
+  z-index:120!important;
+}
