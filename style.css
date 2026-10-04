@@ -658,3 +658,61 @@
   -webkit-tap-highlight-color:transparent!important;
 }
 .touch-layout button.held{transform:scale(.97)!important;filter:brightness(1.15)!important}
+
+/* EmulatorJS-inspired virtual gamepad layout */
+.game-fallback-active .touch-layout{
+ position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;
+ pointer-events:none!important;background:transparent!important;z-index:20!important;
+}
+.game-fallback-active .touch-layout button{
+ pointer-events:auto!important;touch-action:none!important;
+ background:rgba(30,30,30,.58)!important;
+ border:2px solid rgba(255,255,255,.48)!important;
+ color:rgba(255,255,255,.9)!important;
+ box-shadow:0 2px 8px rgba(0,0,0,.45)!important;
+ backdrop-filter:blur(2px);
+}
+.game-fallback-active .shoulders{position:absolute!important;inset:0!important}
+.game-fallback-active .shoulders button{
+ position:absolute!important;top:7vh!important;width:17vw!important;max-width:150px!important;
+ height:7vh!important;max-height:58px!important;min-height:42px!important;border-radius:12px!important;
+}
+.game-fallback-active .shoulders button:first-child{left:3vw!important}
+.game-fallback-active .shoulders button:last-child{right:3vw!important}
+.game-fallback-active .dpad{
+ position:absolute!important;left:3vw!important;bottom:7vh!important;
+ width:min(31vw,190px)!important;height:min(31vw,190px)!important;
+ display:grid!important;grid-template-columns:repeat(3,1fr)!important;grid-template-rows:repeat(3,1fr)!important;
+}
+.game-fallback-active .dpad button{border-radius:8px!important}
+.game-fallback-active .ab{
+ position:absolute!important;right:3vw!important;bottom:9vh!important;
+ width:min(30vw,190px)!important;height:min(17vw,105px)!important;
+ display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:12px!important;
+}
+.game-fallback-active .ab button{
+ width:min(14vw,82px)!important;height:min(14vw,82px)!important;
+ min-width:52px!important;min-height:52px!important;border-radius:50%!important;
+}
+.game-fallback-active .center-controls{
+ position:absolute!important;left:50%!important;bottom:6vh!important;
+ transform:translateX(-50%)!important;display:flex!important;gap:12px!important;
+}
+.game-fallback-active .center-controls button,
+.game-fallback-active .speed-controls button{
+ width:88px!important;height:48px!important;min-width:0!important;min-height:0!important;
+ border-radius:24px!important;font-size:13px!important;
+}
+.game-fallback-active .speed-controls{
+ position:absolute!important;left:50%!important;bottom:1vh!important;
+ transform:translateX(-50%)!important;display:flex!important;gap:55px!important;
+}
+@media(max-width:600px){
+ .game-fallback-active .dpad{width:145px!important;height:145px!important}
+ .game-fallback-active .ab{width:145px!important;height:80px!important}
+ .game-fallback-active .ab button{width:62px!important;height:62px!important;min-width:62px!important;min-height:62px!important}
+ .game-fallback-active .center-controls{bottom:7vh!important}
+ .game-fallback-active .center-controls button{width:78px!important;height:42px!important}
+ .game-fallback-active .speed-controls{gap:48px!important}
+ .game-fallback-active .speed-controls button{width:72px!important;height:40px!important}
+}
