@@ -1874,3 +1874,110 @@ body.mobile-game-active .exit-mobile-game-fullscreen.show{
     bottom:5vh!important;
   }
 }
+
+
+/* PAGE FULLSCREEN — keep the normal controller layout.
+   This is separate from "Fullscreen Game" and "Fullscreen Game (Mobile)". */
+.page-native-fullscreen:not(.nested-game-fullscreen) .touch-layout,
+.page-fallback-fullscreen:not(.nested-game-fullscreen) .touch-layout{
+  position:relative!important;
+  left:auto!important;
+  right:auto!important;
+  top:auto!important;
+  bottom:auto!important;
+  inset:auto!important;
+  width:min(100%,720px)!important;
+  height:auto!important;
+  max-width:720px!important;
+  min-height:0!important;
+  margin:16px auto!important;
+  padding:0!important;
+  display:grid!important;
+  grid-template-columns:1fr 1fr 1fr!important;
+  align-items:center!important;
+  gap:12px!important;
+  overflow:visible!important;
+  background:none!important;
+  z-index:auto!important;
+  pointer-events:auto!important;
+}
+.page-native-fullscreen:not(.nested-game-fullscreen) .touch-layout button,
+.page-fallback-fullscreen:not(.nested-game-fullscreen) .touch-layout button{
+  position:static!important;
+  width:auto!important;
+  height:auto!important;
+  min-width:0!important;
+  max-width:none!important;
+  min-height:48px!important;
+  margin:0!important;
+  padding:0 10px!important;
+  transform:none!important;
+}
+.page-native-fullscreen:not(.nested-game-fullscreen) .dpad,
+.page-fallback-fullscreen:not(.nested-game-fullscreen) .dpad{
+  position:static!important;
+  width:auto!important;
+  height:auto!important;
+  display:grid!important;
+  grid-template-columns:repeat(3,48px)!important;
+  grid-template-rows:repeat(3,48px)!important;
+}
+.page-native-fullscreen:not(.nested-game-fullscreen) .ab,
+.page-fallback-fullscreen:not(.nested-game-fullscreen) .ab{
+  position:static!important;
+  width:auto!important;
+  height:auto!important;
+  display:flex!important;
+  justify-content:center!important;
+  gap:12px!important;
+}
+.page-native-fullscreen:not(.nested-game-fullscreen) .ab button,
+.page-fallback-fullscreen:not(.nested-game-fullscreen) .ab button{
+  width:62px!important;
+  height:62px!important;
+  min-width:62px!important;
+  min-height:62px!important;
+  padding:0!important;
+  border-radius:50%!important;
+}
+.page-native-fullscreen:not(.nested-game-fullscreen) .center-controls,
+.page-fallback-fullscreen:not(.nested-game-fullscreen) .center-controls{
+  position:static!important;
+  width:auto!important;
+  height:auto!important;
+  display:flex!important;
+  transform:none!important;
+}
+.page-native-fullscreen:not(.nested-game-fullscreen) .shoulders,
+.page-fallback-fullscreen:not(.nested-game-fullscreen) .shoulders{
+  position:static!important;
+  width:auto!important;
+  height:auto!important;
+  display:flex!important;
+  grid-column:1/-1!important;
+}
+.page-native-fullscreen:not(.nested-game-fullscreen) .speed-controls,
+.page-fallback-fullscreen:not(.nested-game-fullscreen) .speed-controls{
+  position:static!important;
+  width:auto!important;
+  height:auto!important;
+  display:flex!important;
+  grid-column:1/-1!important;
+  justify-content:center!important;
+  gap:12px!important;
+}
+.page-native-fullscreen:not(.nested-game-fullscreen) .toggle-touch,
+.page-fallback-fullscreen:not(.nested-game-fullscreen) .toggle-touch{
+  position:relative!important;
+  top:auto!important;
+  right:auto!important;
+  left:auto!important;
+  margin:10px auto!important;
+}
+@media(max-width:600px){
+  .page-native-fullscreen:not(.nested-game-fullscreen) .touch-layout,
+  .page-fallback-fullscreen:not(.nested-game-fullscreen) .touch-layout{
+    width:100%!important;
+    max-width:720px!important;
+  }
+}
