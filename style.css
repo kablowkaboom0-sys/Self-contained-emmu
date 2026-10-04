@@ -88,3 +88,102 @@
 
 .exit-game-fullscreen{display:none}
 .game-fallback-active .exit-game-fullscreen.show{display:block!important;position:fixed!important;top:10px!important;left:10px!important;z-index:50!important;margin:0!important;padding:8px 12px!important;background:rgba(25,25,25,.88)!important;border:2px solid rgba(255,255,255,.7)!important;border-radius:8px!important;color:#fff!important;font-weight:700!important}
+
+/* Responsive fullscreen controls: matches the requested portrait layout and keeps every button inside the viewport */
+.game-fallback-active .touch-layout{
+  position:fixed!important;
+  left:0!important;right:0!important;bottom:0!important;
+  width:100vw!important;height:38dvh!important;
+  min-height:210px!important;max-height:390px!important;
+  padding:0!important;margin:0!important;
+  display:block!important;
+  background:linear-gradient(to bottom,transparent,rgba(0,0,0,.35) 20%,rgba(0,0,0,.78))!important;
+  z-index:20!important;
+}
+.game-fallback-active .dpad{
+  position:absolute!important;
+  left:clamp(16px,4vw,42px)!important;
+  bottom:clamp(70px,10dvh,105px)!important;
+  width:clamp(132px,24vw,190px)!important;
+  height:clamp(132px,24vw,190px)!important;
+  display:grid!important;
+  grid-template-columns:repeat(3,1fr)!important;
+  grid-template-rows:repeat(3,1fr)!important;
+  gap:0!important;
+  transform:none!important;
+}
+.game-fallback-active .dpad button{
+  width:100%!important;height:100%!important;
+  min-height:0!important;
+  border-radius:12px!important;
+}
+.game-fallback-active .dpad .up{grid-column:2!important;grid-row:1!important}
+.game-fallback-active .dpad .left{grid-column:1!important;grid-row:2!important}
+.game-fallback-active .dpad .right{grid-column:3!important;grid-row:2!important}
+.game-fallback-active .dpad .down{grid-column:2!important;grid-row:3!important}
+.game-fallback-active .center-controls{
+  position:absolute!important;
+  left:50%!important;
+  bottom:clamp(78px,11dvh,112px)!important;
+  transform:translateX(-50%)!important;
+  display:flex!important;
+  gap:clamp(8px,2vw,18px)!important;
+  width:auto!important;
+}
+.game-fallback-active .center-controls button{
+  width:clamp(82px,15vw,125px)!important;
+  min-height:clamp(46px,6dvh,62px)!important;
+  font-size:clamp(12px,2vw,18px)!important;
+  padding:0 8px!important;
+}
+.game-fallback-active .ab{
+  position:absolute!important;
+  right:clamp(16px,4vw,42px)!important;
+  bottom:clamp(78px,11dvh,112px)!important;
+  width:clamp(150px,25vw,210px)!important;
+  height:clamp(70px,12vw,105px)!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-end!important;
+  gap:clamp(10px,2vw,20px)!important;
+  transform:none!important;
+}
+.game-fallback-active .ab button{
+  flex:0 0 auto!important;
+  width:clamp(58px,9vw,82px)!important;
+  height:clamp(58px,9vw,82px)!important;
+  min-height:0!important;
+  border-radius:50%!important;
+  font-size:clamp(18px,3vw,28px)!important;
+}
+.game-fallback-active .shoulders{
+  position:absolute!important;
+  left:clamp(16px,4vw,42px)!important;
+  right:clamp(16px,4vw,42px)!important;
+  bottom:clamp(12px,2dvh,22px)!important;
+  height:clamp(42px,6dvh,58px)!important;
+  display:flex!important;
+  gap:clamp(10px,2vw,22px)!important;
+}
+.game-fallback-active .shoulders button{
+  flex:1!important;
+  min-height:0!important;
+  height:100%!important;
+  font-size:clamp(16px,3vw,26px)!important;
+}
+@media (max-width:600px){
+  .game-fallback-active .touch-layout{height:38dvh!important;min-height:225px!important;max-height:350px!important}
+  .game-fallback-active .dpad{left:4vw!important;bottom:105px!important;width:120px!important;height:120px!important}
+  .game-fallback-active .center-controls{bottom:108px!important}
+  .game-fallback-active .ab{right:4vw!important;bottom:108px!important;width:145px!important;height:70px!important}
+  .game-fallback-active .ab button{width:56px!important;height:56px!important}
+  .game-fallback-active .shoulders{bottom:10px!important;height:46px!important}
+}
+@media (max-height:600px){
+  .game-fallback-active .touch-layout{height:45dvh!important;min-height:170px!important;max-height:260px!important}
+  .game-fallback-active .dpad{bottom:62px!important;width:100px!important;height:100px!important}
+  .game-fallback-active .center-controls{bottom:64px!important}
+  .game-fallback-active .ab{bottom:64px!important;height:62px!important}
+  .game-fallback-active .ab button{width:50px!important;height:50px!important}
+  .game-fallback-active .shoulders{bottom:8px!important;height:38px!important}
+}
