@@ -1425,3 +1425,60 @@ body.mobile-game-active .exit-mobile-game-fullscreen.show{
     min-height:36px!important;
   }
 }
+
+/* PORTRAIT-ONLY MOBILE FIX
+   Do not alter the horizontal/landscape mobile layout. */
+@media (max-width:600px) and (orientation:portrait){
+  body.mobile-game-active .center-controls{
+    left:120px!important;
+    right:auto!important;
+    transform:none!important;
+    bottom:14vh!important;
+    width:116px!important;
+    height:40px!important;
+    gap:4px!important;
+    justify-content:flex-start!important;
+  }
+  body.mobile-game-active .center-controls button{
+    flex:0 0 56px!important;
+    width:56px!important;
+    min-width:56px!important;
+    max-width:56px!important;
+    height:40px!important;
+    min-height:40px!important;
+    padding:0!important;
+    font-size:9px!important;
+  }
+  body.mobile-game-active .ab{
+    left:auto!important;
+    right:8px!important;
+    bottom:14vh!important;
+    width:122px!important;
+    height:64px!important;
+    gap:4px!important;
+    justify-content:flex-end!important;
+  }
+  body.mobile-game-active .ab button{
+    flex:0 0 55px!important;
+    width:55px!important;
+    min-width:55px!important;
+    max-width:55px!important;
+    height:55px!important;
+    min-height:55px!important;
+  }
+  body.mobile-game-active .dpad{
+    left:8px!important;
+    bottom:14vh!important;
+    width:108px!important;
+    height:108px!important;
+    grid-template-columns:repeat(3,36px)!important;
+    grid-template-rows:repeat(3,36px)!important;
+  }
+  body.mobile-game-active .dpad button{
+    width:36px!important;
+    min-width:36px!important;
+    max-width:36px!important;
+    height:36px!important;
+    min-height:36px!important;
+  }
+}
