@@ -296,3 +296,81 @@
   .game-fallback-active .ab button{width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important}
   .game-fallback-active .shoulders{bottom:7px!important;height:36px!important}
 }
+
+/* Reference touch layout — fixed visual arrangement matching the supplied portrait screenshot */
+.game-fallback-active .touch-layout{
+  position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;
+  margin:0!important;padding:0!important;display:block!important;overflow:hidden!important;
+  background:none!important;z-index:20!important;pointer-events:none!important;
+}
+.game-fallback-active .touch-layout button{pointer-events:auto!important;box-sizing:border-box!important}
+
+/* L / R — small buttons higher up on the sides */
+.game-fallback-active .shoulders{
+  position:absolute!important;left:0!important;right:0!important;bottom:35dvh!important;
+  height:clamp(52px,8vw,72px)!important;display:block!important;
+}
+.game-fallback-active .shoulders button{
+  position:absolute!important;top:0!important;width:clamp(105px,14vw,145px)!important;
+  height:100%!important;min-height:0!important;padding:0!important;font-size:clamp(22px,3.5vw,34px)!important;
+}
+.game-fallback-active .shoulders button:first-child{left:3.5vw!important}
+.game-fallback-active .shoulders button:last-child{right:3.5vw!important}
+
+/* D-pad — large lower-left cross */
+.game-fallback-active .dpad{
+  position:absolute!important;left:2.5vw!important;bottom:12dvh!important;
+  width:clamp(150px,35vw,292px)!important;height:clamp(150px,35vw,292px)!important;
+  display:grid!important;grid-template-columns:repeat(3,1fr)!important;grid-template-rows:repeat(3,1fr)!important;
+  gap:0!important;transform:none!important;
+}
+.game-fallback-active .dpad button{
+  width:100%!important;height:100%!important;min-height:0!important;padding:0!important;border-radius:10px!important;
+}
+
+/* SELECT / START — centered */
+.game-fallback-active .center-controls{
+  position:absolute!important;left:50%!important;bottom:5.7dvh!important;
+  transform:translateX(-50%)!important;display:flex!important;gap:clamp(12px,4vw,38px)!important;
+  width:max-content!important;
+}
+.game-fallback-active .center-controls button{
+  width:clamp(92px,14vw,120px)!important;height:clamp(58px,8vw,72px)!important;
+  min-height:0!important;padding:0!important;font-size:clamp(15px,2.4vw,21px)!important;
+}
+
+/* B / A — large round buttons on the right, B left of A */
+.game-fallback-active .ab{
+  position:absolute!important;right:2.5vw!important;bottom:15.5dvh!important;
+  width:clamp(155px,31vw,270px)!important;height:clamp(80px,16vw,135px)!important;
+  display:flex!important;align-items:center!important;justify-content:flex-end!important;
+  gap:clamp(14px,2.5vw,28px)!important;transform:none!important;
+}
+.game-fallback-active .ab button{
+  width:clamp(68px,14vw,120px)!important;height:clamp(68px,14vw,120px)!important;
+  min-width:0!important;min-height:0!important;padding:0!important;border-radius:50%!important;
+  font-size:clamp(22px,4vw,38px)!important;
+}
+.game-fallback-active .ab .b{order:1!important}.game-fallback-active .ab .a{order:2!important}
+
+/* Fast / Slow — bottom row, matching the reference */
+.game-fallback-active .speed-controls{
+  position:absolute!important;left:50%!important;bottom:1.1dvh!important;
+  transform:translateX(-50%)!important;display:flex!important;
+  gap:clamp(45px,22vw,185px)!important;width:max-content!important;
+}
+.game-fallback-active .speed-controls button{
+  width:clamp(92px,14vw,120px)!important;height:clamp(58px,8vw,72px)!important;
+  min-height:0!important;padding:0!important;font-size:clamp(15px,2.4vw,21px)!important;
+}
+
+/* Keep all reference controls compact on short phones */
+@media (max-height:700px){
+  .game-fallback-active .shoulders{bottom:34dvh!important}
+  .game-fallback-active .dpad{bottom:13dvh!important;width:clamp(120px,30vw,190px)!important;height:clamp(120px,30vw,190px)!important}
+  .game-fallback-active .ab{bottom:16dvh!important}
+  .game-fallback-active .ab button{width:clamp(56px,12vw,85px)!important;height:clamp(56px,12vw,85px)!important}
+  .game-fallback-active .center-controls{bottom:5.5dvh!important}
+  .game-fallback-active .speed-controls{bottom:1dvh!important}
+  .game-fallback-active .center-controls button,.game-fallback-active .speed-controls button{width:clamp(76px,16vw,100px)!important;height:clamp(45px,8vw,60px)!important}
+}
