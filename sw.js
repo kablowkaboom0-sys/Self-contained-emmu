@@ -1,4 +1,4 @@
-const C="self-contained-gba-v22";
+const C="self-contained-gba-v23";
 const ASSETS=["./","index.html","style.css","sw.js","js/arm.js","js/audio.js","js/core.js","js/gba.js","js/gpio.js","js/io.js","js/irq.js","js/keypad.js","js/mmu.js","js/savedata.js","js/sio.js","js/thumb.js","js/util.js","js/video.js","js/video/proxy.js","js/video/software.js","js/video/worker.js","resources/biosbin.js"];
 
 self.addEventListener("install",e=>{
