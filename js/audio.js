@@ -3,10 +3,13 @@ class GameBoyAdvanceAudio {
 		window.AudioContext = window.AudioContext || window.webkitAudioContext;
 		if (window.AudioContext) {
 			var self = this;
-			this.context = new AudioContext();
+			this.context = new AudioContext({latencyHint: "playback"});
 			this.bufferSize = 0;
-			this.bufferSize = 4096;
-			this.maxSamples = this.bufferSize << 2;
+			this.bufferSize = 2048;
+			// Keep a larger ring buffer so short CPU/frame-time spikes do not immediately underrun audio.
+			this.maxSamples = this.bufferSize << 4;
+			this.prebufferSamples = this.bufferSize << 2;
+			this.audioStarted = false;
 			this.buffers = [
 				new Float32Array(this.maxSamples),
 				new Float32Array(this.maxSamples)
@@ -135,6 +138,7 @@ class GameBoyAdvanceAudio {
 		this.nextSample = 0;
 		this.outputPointer = 0;
 		this.samplePointer = 0;
+		this.audioStarted = false;
 
 		this.backup = 0;
 		this.totalSamples = 0;
@@ -733,6 +737,17 @@ class GameBoyAdvanceAudio {
 		if (this.masterEnable) {
 			var i;
 			var o = this.outputPointer;
+			var available = (this.samplePointer - o + this.maxSamples) & this.sampleMask;
+			if (!this.audioStarted) {
+				if (available < this.prebufferSamples) {
+					for (i = 0; i < this.bufferSize; ++i) {
+						left[i] = 0;
+						right[i] = 0;
+					}
+					return;
+				}
+				this.audioStarted = true;
+			}
 			for (i = 0; i < this.bufferSize; ++i, o += this.resampleRatio) {
 				if (o >= this.maxSamples) {
 					o -= this.maxSamples;
