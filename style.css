@@ -745,3 +745,243 @@
 .page-fallback-fullscreen.nested-game-fullscreen .exit-game-fullscreen{
   z-index:100001!important;
 }
+
+/* SEPARATE MOBILE GAME FULLSCREEN
+   This is intentionally independent from the existing Fullscreen Game mode. */
+.mobile-game-active{
+  background:#000!important;
+  overflow:hidden!important;
+  padding:0!important;
+}
+.mobile-game-active .app{
+  position:fixed!important;
+  inset:0!important;
+  width:100vw!important;
+  height:100dvh!important;
+  max-width:none!important;
+  margin:0!important;
+  padding:0!important;
+  overflow:hidden!important;
+  background:#000!important;
+}
+.mobile-game-active header,
+.mobile-game-active aside,
+.mobile-game-active .actions{
+  display:none!important;
+}
+.mobile-game-active main{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  margin:0!important;
+  padding:0!important;
+}
+.mobile-game-active .player{
+  position:fixed!important;
+  inset:0!important;
+  width:100vw!important;
+  height:100dvh!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:#000!important;
+  overflow:hidden!important;
+}
+.mobile-game-active .screen-wrap{
+  position:fixed!important;
+  inset:0!important;
+  width:100vw!important;
+  height:100dvh!important;
+  max-width:none!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  background:#000!important;
+  overflow:hidden!important;
+  z-index:1!important;
+}
+.mobile-game-active .screen-wrap canvas{
+  width:100%!important;
+  height:100%!important;
+  max-width:100vw!important;
+  max-height:100dvh!important;
+  object-fit:contain!important;
+  image-rendering:pixelated!important;
+}
+.mobile-game-active #status{
+  display:none!important;
+}
+.mobile-game-active #perf{
+  position:fixed!important;
+  top:10px!important;
+  left:10px!important;
+  z-index:110!important;
+}
+.mobile-game-active .touch-layout{
+  position:fixed!important;
+  inset:0!important;
+  width:100vw!important;
+  height:100dvh!important;
+  margin:0!important;
+  padding:0!important;
+  display:block!important;
+  background:transparent!important;
+  pointer-events:none!important;
+  z-index:100!important;
+}
+.mobile-game-active .touch-layout button{
+  pointer-events:auto!important;
+  touch-action:none!important;
+  -webkit-user-select:none!important;
+  user-select:none!important;
+  background:rgba(25,25,25,.62)!important;
+  border:2px solid rgba(255,255,255,.62)!important;
+  color:#fff!important;
+  box-shadow:0 2px 8px rgba(0,0,0,.45)!important;
+  backdrop-filter:blur(2px);
+}
+.mobile-game-active .shoulders{
+  position:absolute!important;
+  inset:0!important;
+  display:block!important;
+}
+.mobile-game-active .shoulders button{
+  position:absolute!important;
+  top:7vh!important;
+  width:110px!important;
+  height:50px!important;
+  min-width:0!important;
+  min-height:0!important;
+  margin:0!important;
+  padding:0!important;
+  border-radius:12px!important;
+}
+.mobile-game-active .shoulders button:first-child{left:14px!important}
+.mobile-game-active .shoulders button:last-child{right:14px!important}
+.mobile-game-active .dpad{
+  position:absolute!important;
+  left:14px!important;
+  bottom:105px!important;
+  width:132px!important;
+  height:132px!important;
+  margin:0!important;
+  padding:0!important;
+  display:grid!important;
+  grid-template-columns:repeat(3,1fr)!important;
+  grid-template-rows:repeat(3,1fr)!important;
+  gap:0!important;
+}
+.mobile-game-active .dpad button{
+  width:100%!important;
+  height:100%!important;
+  min-width:0!important;
+  min-height:0!important;
+  padding:0!important;
+  border-radius:9px!important;
+}
+.mobile-game-active .ab{
+  position:absolute!important;
+  right:14px!important;
+  bottom:110px!important;
+  width:145px!important;
+  height:75px!important;
+  margin:0!important;
+  padding:0!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-end!important;
+  gap:8px!important;
+}
+.mobile-game-active .ab button{
+  width:62px!important;
+  height:62px!important;
+  min-width:62px!important;
+  min-height:62px!important;
+  padding:0!important;
+  border-radius:50%!important;
+}
+.mobile-game-active .ab .b{order:1!important}
+.mobile-game-active .ab .a{order:2!important}
+.mobile-game-active .center-controls{
+  position:absolute!important;
+  left:50%!important;
+  bottom:104px!important;
+  transform:translateX(-50%)!important;
+  display:flex!important;
+  gap:10px!important;
+  width:max-content!important;
+  margin:0!important;
+  padding:0!important;
+}
+.mobile-game-active .center-controls button{
+  width:76px!important;
+  height:42px!important;
+  min-width:76px!important;
+  min-height:42px!important;
+  margin:0!important;
+  padding:0!important;
+  font-size:11px!important;
+}
+.mobile-game-active .speed-controls{
+  position:absolute!important;
+  left:50%!important;
+  bottom:12px!important;
+  transform:translateX(-50%)!important;
+  display:flex!important;
+  gap:55px!important;
+  width:max-content!important;
+  margin:0!important;
+  padding:0!important;
+}
+.mobile-game-active .speed-controls button{
+  width:72px!important;
+  height:40px!important;
+  min-width:72px!important;
+  min-height:40px!important;
+  margin:0!important;
+  padding:0!important;
+  font-size:11px!important;
+}
+.mobile-game-active .toggle-touch{
+  position:fixed!important;
+  top:10px!important;
+  right:10px!important;
+  z-index:120!important;
+  margin:0!important;
+  min-height:0!important;
+  padding:8px 10px!important;
+  background:rgba(25,25,25,.82)!important;
+  border:2px solid rgba(255,255,255,.65)!important;
+}
+.mobile-game-active .exit-mobile-game-fullscreen.show{
+  display:block!important;
+  position:fixed!important;
+  top:10px!important;
+  left:10px!important;
+  z-index:120!important;
+  margin:0!important;
+  min-height:0!important;
+  padding:8px 10px!important;
+  background:rgba(25,25,25,.82)!important;
+  border:2px solid rgba(255,255,255,.65)!important;
+  border-radius:8px!important;
+  color:#fff!important;
+  font-weight:700!important;
+}
+.exit-mobile-game-fullscreen{display:none}
+.mobile-game-active.touch-hidden .touch-layout{display:none!important}
+@media(max-width:600px){
+  .mobile-game-active .shoulders button{width:88px!important;height:46px!important}
+  .mobile-game-active .dpad{left:12px!important;bottom:94px!important;width:118px!important;height:118px!important}
+  .mobile-game-active .ab{right:12px!important;bottom:98px!important;width:128px!important;height:66px!important}
+  .mobile-game-active .ab button{width:56px!important;height:56px!important;min-width:56px!important;min-height:56px!important}
+  .mobile-game-active .center-controls{bottom:92px!important}
+  .mobile-game-active .center-controls button{width:68px!important;height:38px!important;min-width:68px!important;min-height:38px!important}
+  .mobile-game-active .speed-controls{bottom:10px!important;gap:38px!important}
+  .mobile-game-active .speed-controls button{width:66px!important;height:36px!important;min-width:66px!important;min-height:36px!important}
+}
