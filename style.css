@@ -716,3 +716,13 @@
  .game-fallback-active .speed-controls{gap:48px!important}
  .game-fallback-active .speed-controls button{width:72px!important;height:40px!important}
 }
+
+/* Nested fullscreen: game can fill the viewport while the page remains fullscreen */
+.page-native-fullscreen.nested-game-fullscreen,
+.page-fallback-fullscreen.nested-game-fullscreen{overflow:hidden!important}
+.page-native-fullscreen.nested-game-fullscreen .screen-wrap.game-fallback-fullscreen,
+.page-fallback-fullscreen.nested-game-fullscreen .screen-wrap.game-fallback-fullscreen{
+ position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;
+ max-width:none!important;max-height:none!important;margin:0!important;padding:0!important;
+ z-index:99999!important;background:#000!important;border-radius:0!important;
+}
