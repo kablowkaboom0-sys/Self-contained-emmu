@@ -1851,3 +1851,26 @@ body.mobile-game-active .exit-mobile-game-fullscreen.show{
 }
 
 /* Keep the existing landscape mobile fullscreen rules unchanged. */
+
+
+/* PORTRAIT MOBILE — final positioning adjustment
+   Keep the normal Choose .GBA header/button unchanged.
+   Landscape layout remains untouched. */
+@media (max-width:600px) and (orientation:portrait){
+  body.mobile-game-active .shoulders{
+    top:53vh!important;
+    left:18px!important;
+    right:18px!important;
+    height:58px!important;
+    gap:18px!important;
+  }
+  body.mobile-game-active .shoulders button{
+    height:58px!important;
+    min-height:58px!important;
+  }
+
+  /* Move SELECT / START slightly downward so they clear the D-pad and B/A. */
+  body.mobile-game-active .center-controls{
+    bottom:5vh!important;
+  }
+}
