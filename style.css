@@ -1368,3 +1368,60 @@ body.mobile-game-active .exit-mobile-game-fullscreen.show{
   body.mobile-game-active .center-controls button{flex-basis:67px!important;width:67px!important;height:40px!important;min-width:67px!important;min-height:40px!important}
   body.mobile-game-active .shoulders button{top:9vh!important;width:80px!important;height:42px!important;min-width:80px!important;min-height:42px!important}
 }
+
+/* MOBILE PORTRAIT NO-OVERLAP v3
+   The phone reports ~414 CSS px while the screenshot is ~828 physical px.
+   Reserve separate horizontal lanes for center and A/B controls. */
+@media (max-width:600px){
+  body.mobile-game-active .center-controls{
+    left:6px!important;
+    right:auto!important;
+    transform:none!important;
+    bottom:14vh!important;
+    width:205px!important;
+    height:40px!important;
+    justify-content:flex-start!important;
+    gap:6px!important;
+  }
+  body.mobile-game-active .center-controls button{
+    flex:0 0 67px!important;
+    width:67px!important;
+    min-width:67px!important;
+    max-width:67px!important;
+    height:40px!important;
+    min-height:40px!important;
+    padding:0!important;
+  }
+  body.mobile-game-active .ab{
+    left:auto!important;
+    right:8px!important;
+    bottom:14vh!important;
+    width:122px!important;
+    height:64px!important;
+    gap:4px!important;
+    justify-content:flex-end!important;
+  }
+  body.mobile-game-active .ab button{
+    flex:0 0 55px!important;
+    width:55px!important;
+    min-width:55px!important;
+    max-width:55px!important;
+    height:55px!important;
+    min-height:55px!important;
+  }
+  body.mobile-game-active .dpad{
+    left:8px!important;
+    bottom:14vh!important;
+    width:108px!important;
+    height:108px!important;
+    grid-template-columns:repeat(3,36px)!important;
+    grid-template-rows:repeat(3,36px)!important;
+  }
+  body.mobile-game-active .dpad button{
+    width:36px!important;
+    min-width:36px!important;
+    max-width:36px!important;
+    height:36px!important;
+    min-height:36px!important;
+  }
+}
