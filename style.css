@@ -645,3 +645,16 @@
   .game-fallback-active .speed-controls{width:180px!important;gap:28px!important}
   .game-fallback-active .speed-controls button{width:62px!important;min-width:62px!important}
 }
+
+/* Reliable mobile/touch input */
+.game-fallback-active .touch-layout,
+.game-fallback-active .touch-layout button,
+.touch-layout,
+.touch-layout button{
+  touch-action:none!important;
+  -webkit-user-select:none!important;
+  user-select:none!important;
+  -webkit-touch-callout:none!important;
+  -webkit-tap-highlight-color:transparent!important;
+}
+.touch-layout button.held{transform:scale(.97)!important;filter:brightness(1.15)!important}
