@@ -1044,3 +1044,174 @@
   left:10px!important;
   z-index:120!important;
 }
+
+/* FINAL MOBILE FULLSCREEN LAYOUT FIX
+   Keep every control in its own zone on portrait phones. */
+body.mobile-game-active .player:fullscreen .touch-layout,
+body.mobile-game-active .touch-layout{
+  position:fixed!important;
+  inset:0!important;
+  width:100vw!important;
+  height:100dvh!important;
+  z-index:100!important;
+  pointer-events:none!important;
+  display:block!important;
+}
+body.mobile-game-active .player:fullscreen .shoulders,
+body.mobile-game-active .shoulders{
+  position:fixed!important;
+  inset:0!important;
+  width:100vw!important;
+  height:100dvh!important;
+  display:block!important;
+}
+body.mobile-game-active .player:fullscreen .shoulders button,
+body.mobile-game-active .shoulders button{
+  position:absolute!important;
+  top:12vh!important;
+  width:92px!important;
+  height:46px!important;
+  min-width:92px!important;
+  min-height:46px!important;
+  margin:0!important;
+}
+body.mobile-game-active .player:fullscreen .shoulders button:first-child,
+body.mobile-game-active .shoulders button:first-child{left:14px!important}
+body.mobile-game-active .player:fullscreen .shoulders button:last-child,
+body.mobile-game-active .shoulders button:last-child{right:14px!important}
+
+body.mobile-game-active .player:fullscreen .dpad,
+body.mobile-game-active .dpad{
+  position:fixed!important;
+  left:14px!important;
+  bottom:17vh!important;
+  width:126px!important;
+  height:126px!important;
+  margin:0!important;
+  display:grid!important;
+  grid-template-columns:repeat(3,1fr)!important;
+  grid-template-rows:repeat(3,1fr)!important;
+  gap:0!important;
+}
+body.mobile-game-active .player:fullscreen .dpad button,
+body.mobile-game-active .dpad button{
+  width:100%!important;
+  height:100%!important;
+  min-width:0!important;
+  min-height:0!important;
+  margin:0!important;
+}
+
+body.mobile-game-active .player:fullscreen .ab,
+body.mobile-game-active .ab{
+  position:fixed!important;
+  right:14px!important;
+  bottom:17vh!important;
+  width:150px!important;
+  height:82px!important;
+  margin:0!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-end!important;
+  gap:10px!important;
+}
+body.mobile-game-active .player:fullscreen .ab button,
+body.mobile-game-active .ab button{
+  width:66px!important;
+  height:66px!important;
+  min-width:66px!important;
+  min-height:66px!important;
+  margin:0!important;
+  padding:0!important;
+  border-radius:50%!important;
+}
+
+body.mobile-game-active .player:fullscreen .center-controls,
+body.mobile-game-active .center-controls{
+  position:fixed!important;
+  left:50%!important;
+  bottom:17vh!important;
+  transform:translateX(-50%)!important;
+  display:flex!important;
+  gap:12px!important;
+  width:auto!important;
+  height:44px!important;
+  margin:0!important;
+  padding:0!important;
+}
+body.mobile-game-active .player:fullscreen .center-controls button,
+body.mobile-game-active .center-controls button{
+  width:82px!important;
+  height:44px!important;
+  min-width:82px!important;
+  min-height:44px!important;
+  margin:0!important;
+  padding:0 6px!important;
+  font-size:11px!important;
+}
+
+body.mobile-game-active .player:fullscreen .speed-controls,
+body.mobile-game-active .speed-controls{
+  position:fixed!important;
+  left:50%!important;
+  bottom:4vh!important;
+  transform:translateX(-50%)!important;
+  display:flex!important;
+  gap:42px!important;
+  width:auto!important;
+  height:40px!important;
+  margin:0!important;
+  padding:0!important;
+}
+body.mobile-game-active .player:fullscreen .speed-controls button,
+body.mobile-game-active .speed-controls button{
+  width:72px!important;
+  height:40px!important;
+  min-width:72px!important;
+  min-height:40px!important;
+  margin:0!important;
+}
+
+body.mobile-game-active .player:fullscreen .toggle-touch,
+body.mobile-game-active .toggle-touch{
+  position:fixed!important;
+  top:2vh!important;
+  right:14px!important;
+  z-index:130!important;
+  margin:0!important;
+}
+body.mobile-game-active .player:fullscreen .exit-mobile-game-fullscreen.show,
+body.mobile-game-active .exit-mobile-game-fullscreen.show{
+  position:fixed!important;
+  top:2vh!important;
+  left:14px!important;
+  z-index:130!important;
+  margin:0!important;
+}
+body.mobile-game-active .player:fullscreen #perf,
+body.mobile-game-active #perf{
+  position:fixed!important;
+  top:9vh!important;
+  left:14px!important;
+  z-index:110!important;
+  transform:scale(.75)!important;
+  transform-origin:top left!important;
+}
+@media(max-width:600px){
+  body.mobile-game-active .player:fullscreen .dpad,
+  body.mobile-game-active .dpad{left:12px!important;bottom:17vh!important;width:112px!important;height:112px!important}
+  body.mobile-game-active .player:fullscreen .ab,
+  body.mobile-game-active .ab{right:12px!important;bottom:17vh!important;width:130px!important}
+  body.mobile-game-active .player:fullscreen .ab button,
+  body.mobile-game-active .ab button{width:58px!important;height:58px!important;min-width:58px!important;min-height:58px!important}
+  body.mobile-game-active .player:fullscreen .center-controls,
+  body.mobile-game-active .center-controls{bottom:17vh!important;gap:8px!important}
+  body.mobile-game-active .player:fullscreen .center-controls button,
+  body.mobile-game-active .center-controls button{width:70px!important;height:40px!important;min-width:70px!important;min-height:40px!important}
+  body.mobile-game-active .player:fullscreen .shoulders button,
+  body.mobile-game-active .shoulders button{top:12vh!important;width:82px!important;height:42px!important;min-width:82px!important;min-height:42px!important}
+  body.mobile-game-active .player:fullscreen .speed-controls,
+  body.mobile-game-active .speed-controls{bottom:4vh!important;gap:32px!important}
+  body.mobile-game-active .player:fullscreen .speed-controls button,
+  body.mobile-game-active .speed-controls button{width:64px!important;height:36px!important;min-width:64px!important;min-height:36px!important}
+}
