@@ -1215,3 +1215,156 @@ body.mobile-game-active #perf{
   body.mobile-game-active .player:fullscreen .speed-controls button,
   body.mobile-game-active .speed-controls button{width:64px!important;height:36px!important;min-width:64px!important;min-height:36px!important}
 }
+
+/* MOBILE FULLSCREEN CLEAN LAYOUT v2 */
+body.mobile-game-active #perf{display:none!important}
+body.mobile-game-active #status{display:none!important}
+
+body.mobile-game-active .touch-layout{
+  position:fixed!important;
+  inset:0!important;
+  width:100vw!important;
+  height:100dvh!important;
+  display:block!important;
+  z-index:100!important;
+  pointer-events:none!important;
+}
+body.mobile-game-active .touch-layout button{pointer-events:auto!important}
+
+body.mobile-game-active .shoulders{
+  position:fixed!important;
+  inset:0!important;
+  display:block!important;
+  pointer-events:none!important;
+}
+body.mobile-game-active .shoulders button{
+  position:absolute!important;
+  top:10vh!important;
+  width:90px!important;
+  height:48px!important;
+  min-width:90px!important;
+  min-height:48px!important;
+  padding:0!important;
+  margin:0!important;
+}
+body.mobile-game-active .shoulders button:first-child{left:12px!important}
+body.mobile-game-active .shoulders button:last-child{right:12px!important}
+
+body.mobile-game-active .dpad{
+  position:fixed!important;
+  left:12px!important;
+  bottom:15vh!important;
+  width:126px!important;
+  height:126px!important;
+  display:grid!important;
+  grid-template-columns:repeat(3,42px)!important;
+  grid-template-rows:repeat(3,42px)!important;
+  margin:0!important;
+  padding:0!important;
+}
+body.mobile-game-active .dpad button{
+  width:42px!important;
+  height:42px!important;
+  min-width:42px!important;
+  min-height:42px!important;
+  margin:0!important;
+  padding:0!important;
+}
+
+body.mobile-game-active .ab{
+  position:fixed!important;
+  right:12px!important;
+  bottom:15vh!important;
+  width:140px!important;
+  height:76px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:12px!important;
+  margin:0!important;
+  padding:0!important;
+}
+body.mobile-game-active .ab button{
+  flex:0 0 62px!important;
+  width:62px!important;
+  height:62px!important;
+  min-width:62px!important;
+  min-height:62px!important;
+  margin:0!important;
+  padding:0!important;
+  border-radius:50%!important;
+}
+
+body.mobile-game-active .center-controls{
+  position:fixed!important;
+  left:50%!important;
+  bottom:15vh!important;
+  transform:translateX(-50%)!important;
+  width:150px!important;
+  height:44px!important;
+  display:flex!important;
+  justify-content:center!important;
+  gap:8px!important;
+  margin:0!important;
+  padding:0!important;
+}
+body.mobile-game-active .center-controls button{
+  flex:0 0 71px!important;
+  width:71px!important;
+  height:44px!important;
+  min-width:71px!important;
+  min-height:44px!important;
+  margin:0!important;
+  padding:0!important;
+  font-size:10px!important;
+}
+
+body.mobile-game-active .speed-controls{
+  position:fixed!important;
+  left:50%!important;
+  bottom:3vh!important;
+  transform:translateX(-50%)!important;
+  width:150px!important;
+  height:40px!important;
+  display:flex!important;
+  justify-content:space-between!important;
+  gap:20px!important;
+  margin:0!important;
+  padding:0!important;
+}
+body.mobile-game-active .speed-controls button{
+  flex:0 0 65px!important;
+  width:65px!important;
+  height:40px!important;
+  min-width:65px!important;
+  min-height:40px!important;
+  margin:0!important;
+  padding:0!important;
+}
+
+body.mobile-game-active .toggle-touch{
+  position:fixed!important;
+  top:2vh!important;
+  right:12px!important;
+  z-index:150!important;
+  margin:0!important;
+  padding:9px 12px!important;
+}
+body.mobile-game-active .exit-mobile-game-fullscreen.show{
+  position:fixed!important;
+  top:2vh!important;
+  left:12px!important;
+  z-index:150!important;
+  margin:0!important;
+  padding:9px 12px!important;
+}
+
+@media(max-width:600px){
+  body.mobile-game-active .dpad{left:10px!important;bottom:14vh!important;width:114px!important;height:114px!important;grid-template-columns:repeat(3,38px)!important;grid-template-rows:repeat(3,38px)!important}
+  body.mobile-game-active .dpad button{width:38px!important;height:38px!important;min-width:38px!important;min-height:38px!important}
+  body.mobile-game-active .ab{right:10px!important;bottom:14vh!important;width:128px!important}
+  body.mobile-game-active .ab button{flex-basis:56px!important;width:56px!important;height:56px!important;min-width:56px!important;min-height:56px!important}
+  body.mobile-game-active .center-controls{bottom:14vh!important;width:142px!important;height:40px!important}
+  body.mobile-game-active .center-controls button{flex-basis:67px!important;width:67px!important;height:40px!important;min-width:67px!important;min-height:40px!important}
+  body.mobile-game-active .shoulders button{top:9vh!important;width:80px!important;height:42px!important;min-width:80px!important;min-height:42px!important}
+}
