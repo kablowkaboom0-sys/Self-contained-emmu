@@ -1482,3 +1482,148 @@ body.mobile-game-active .exit-mobile-game-fullscreen.show{
     min-height:36px!important;
   }
 }
+
+/* PORTRAIT MOBILE: use the requested compact controller layout exactly */
+@media (max-width:600px) and (orientation:portrait){
+  body.mobile-game-active .touch-layout{
+    position:fixed!important;
+    inset:0!important;
+    width:100vw!important;
+    height:100dvh!important;
+    display:block!important;
+    z-index:100!important;
+    pointer-events:none!important;
+  }
+  body.mobile-game-active .touch-layout button{pointer-events:auto!important}
+
+  /* L / R */
+  body.mobile-game-active .shoulders{
+    position:fixed!important;
+    inset:0!important;
+    width:100vw!important;
+    height:100dvh!important;
+    display:block!important;
+  }
+  body.mobile-game-active .shoulders button{
+    position:absolute!important;
+    top:63vh!important;
+    width:114px!important;
+    height:70px!important;
+    min-width:114px!important;
+    min-height:70px!important;
+    margin:0!important;
+    padding:0!important;
+    font-size:42px!important;
+    border:2px solid rgba(255,255,255,.75)!important;
+    background:rgba(40,40,40,.78)!important;
+  }
+  body.mobile-game-active .shoulders button:first-child{left:30px!important}
+  body.mobile-game-active .shoulders button:last-child{right:30px!important}
+
+  /* D-pad */
+  body.mobile-game-active .dpad{
+    position:fixed!important;
+    left:23px!important;
+    bottom:14vh!important;
+    width:289px!important;
+    height:289px!important;
+    margin:0!important;
+    padding:0!important;
+    display:block!important;
+  }
+  body.mobile-game-active .dpad button{
+    position:absolute!important;
+    width:92px!important;
+    height:92px!important;
+    min-width:92px!important;
+    min-height:92px!important;
+    margin:0!important;
+    padding:0!important;
+    border:0!important;
+    border-radius:8px!important;
+    background:rgba(95,95,95,.9)!important;
+    color:#222!important;
+    font-size:42px!important;
+  }
+  body.mobile-game-active .dpad button:nth-child(1){left:99px!important;top:0!important}
+  body.mobile-game-active .dpad button:nth-child(2){left:0!important;top:99px!important}
+  body.mobile-game-active .dpad button:nth-child(3){left:197px!important;top:99px!important}
+  body.mobile-game-active .dpad button:nth-child(4){left:99px!important;top:197px!important}
+
+  /* A / B */
+  body.mobile-game-active .ab{
+    position:fixed!important;
+    right:22px!important;
+    bottom:20vh!important;
+    width:280px!important;
+    height:190px!important;
+    margin:0!important;
+    padding:0!important;
+    display:block!important;
+  }
+  body.mobile-game-active .ab button{
+    position:absolute!important;
+    width:116px!important;
+    height:116px!important;
+    min-width:116px!important;
+    min-height:116px!important;
+    margin:0!important;
+    padding:0!important;
+    border-radius:50%!important;
+    background:rgba(55,55,55,.9)!important;
+    font-size:40px!important;
+  }
+  body.mobile-game-active .ab .b{left:0!important;top:50px!important}
+  body.mobile-game-active .ab .a{right:0!important;top:0!important}
+
+  /* SELECT / START */
+  body.mobile-game-active .center-controls{
+    position:fixed!important;
+    left:50%!important;
+    bottom:9vh!important;
+    transform:translateX(-50%)!important;
+    width:270px!important;
+    height:70px!important;
+    margin:0!important;
+    padding:0!important;
+    display:flex!important;
+    justify-content:center!important;
+    gap:28px!important;
+  }
+  body.mobile-game-active .center-controls button{
+    width:116px!important;
+    height:70px!important;
+    min-width:116px!important;
+    min-height:70px!important;
+    margin:0!important;
+    padding:0!important;
+    font-size:22px!important;
+    border:2px solid rgba(255,255,255,.75)!important;
+    background:rgba(25,25,25,.78)!important;
+  }
+
+  /* FAST / SLOW */
+  body.mobile-game-active .speed-controls{
+    position:fixed!important;
+    left:50%!important;
+    bottom:2vh!important;
+    transform:translateX(-50%)!important;
+    width:310px!important;
+    height:70px!important;
+    margin:0!important;
+    padding:0!important;
+    display:flex!important;
+    justify-content:space-between!important;
+  }
+  body.mobile-game-active .speed-controls button{
+    width:115px!important;
+    height:70px!important;
+    min-width:115px!important;
+    min-height:70px!important;
+    margin:0!important;
+    padding:0!important;
+    font-size:22px!important;
+    border:2px solid rgba(255,255,255,.75)!important;
+    background:rgba(25,25,25,.78)!important;
+  }
+}
