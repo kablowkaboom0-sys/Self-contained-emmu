@@ -374,3 +374,167 @@
   .game-fallback-active .speed-controls{bottom:1dvh!important}
   .game-fallback-active .center-controls button,.game-fallback-active .speed-controls button{width:clamp(76px,16vw,100px)!important;height:clamp(45px,8vw,60px)!important}
 }
+
+/* FINAL: fullscreen controls use the supplied reference layout, with a safe viewport boundary */
+.game-fallback-active .touch-layout{
+  position:fixed!important;
+  inset:0!important;
+  width:100vw!important;
+  height:100dvh!important;
+  overflow:hidden!important;
+  margin:0!important;
+  padding:0!important;
+  display:block!important;
+  background:none!important;
+  z-index:20!important;
+  pointer-events:none!important;
+}
+.game-fallback-active .touch-layout button{box-sizing:border-box!important;pointer-events:auto!important}
+
+/* L/R */
+.game-fallback-active .shoulders{
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  display:block!important;
+}
+.game-fallback-active .shoulders button{
+  position:absolute!important;
+  top:60%!important;
+  bottom:auto!important;
+  width:min(145px,14vw)!important;
+  height:min(72px,6.5vw)!important;
+  min-width:0!important;
+  min-height:0!important;
+  margin:0!important;
+  padding:0!important;
+  font-size:clamp(20px,3.2vw,34px)!important;
+}
+.game-fallback-active .shoulders button:first-child{left:3.5vw!important}
+.game-fallback-active .shoulders button:last-child{right:3.5vw!important}
+
+/* D-pad */
+.game-fallback-active .dpad{
+  position:absolute!important;
+  left:3vw!important;
+  bottom:11%!important;
+  width:min(292px,35vw)!important;
+  height:min(292px,35vw)!important;
+  margin:0!important;
+  padding:0!important;
+  display:grid!important;
+  grid-template-columns:repeat(3,1fr)!important;
+  grid-template-rows:repeat(3,1fr)!important;
+  gap:0!important;
+  transform:none!important;
+}
+.game-fallback-active .dpad button{
+  width:100%!important;height:100%!important;min-width:0!important;min-height:0!important;
+  margin:0!important;padding:0!important;border-radius:10px!important;
+}
+
+/* SELECT / START */
+.game-fallback-active .center-controls{
+  position:absolute!important;
+  left:50%!important;
+  bottom:3.5%!important;
+  transform:translateX(-50%)!important;
+  display:flex!important;
+  gap:min(38px,4vw)!important;
+  width:max-content!important;
+  margin:0!important;
+}
+.game-fallback-active .center-controls button{
+  width:min(120px,14vw)!important;
+  height:min(72px,7vw)!important;
+  min-width:0!important;min-height:0!important;
+  margin:0!important;padding:0!important;
+  font-size:clamp(14px,2.2vw,21px)!important;
+}
+
+/* B / A */
+.game-fallback-active .ab{
+  position:absolute!important;
+  right:3vw!important;
+  bottom:13%!important;
+  width:min(275px,32vw)!important;
+  height:min(125px,15vw)!important;
+  margin:0!important;padding:0!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-end!important;
+  gap:min(28px,2.5vw)!important;
+  transform:none!important;
+}
+.game-fallback-active .ab button{
+  flex:0 0 auto!important;
+  width:min(120px,13vw)!important;
+  height:min(120px,13vw)!important;
+  min-width:0!important;min-height:0!important;
+  margin:0!important;padding:0!important;
+  border-radius:50%!important;
+  font-size:clamp(20px,4vw,38px)!important;
+}
+
+/* FAST / SLOW */
+.game-fallback-active .speed-controls{
+  position:absolute!important;
+  left:50%!important;
+  bottom:0.8%!important;
+  transform:translateX(-50%)!important;
+  display:flex!important;
+  gap:min(185px,22vw)!important;
+  width:max-content!important;
+  margin:0!important;padding:0!important;
+}
+.game-fallback-active .speed-controls button{
+  width:min(120px,14vw)!important;
+  height:min(72px,7vw)!important;
+  min-width:0!important;min-height:0!important;
+  margin:0!important;padding:0!important;
+  font-size:clamp(14px,2.2vw,21px)!important;
+}
+
+/* Small portrait phones: scale the whole reference control set down rather than letting anything overflow */
+@media (max-width:600px){
+  .game-fallback-active .shoulders button{
+    top:59%!important;
+    width:112px!important;height:58px!important;
+  }
+  .game-fallback-active .shoulders button:first-child{left:4vw!important}
+  .game-fallback-active .shoulders button:last-child{right:4vw!important}
+  .game-fallback-active .dpad{
+    left:3vw!important;bottom:11%!important;
+    width:148px!important;height:148px!important;
+  }
+  .game-fallback-active .ab{
+    right:3vw!important;bottom:13%!important;
+    width:160px!important;height:82px!important;gap:8px!important;
+  }
+  .game-fallback-active .ab button{
+    width:68px!important;height:68px!important;
+  }
+  .game-fallback-active .center-controls{
+    bottom:4%!important;gap:10px!important;
+  }
+  .game-fallback-active .center-controls button{
+    width:84px!important;height:50px!important;font-size:13px!important;
+  }
+  .game-fallback-active .speed-controls{
+    bottom:1%!important;gap:70px!important;
+  }
+  .game-fallback-active .speed-controls button{
+    width:84px!important;height:50px!important;font-size:13px!important;
+  }
+}
+@media (max-height:700px){
+  .game-fallback-active .shoulders button{top:57%!important;width:100px!important;height:48px!important}
+  .game-fallback-active .dpad{bottom:10%!important;width:115px!important;height:115px!important}
+  .game-fallback-active .ab{bottom:12%!important;width:125px!important;height:62px!important}
+  .game-fallback-active .ab button{width:50px!important;height:50px!important}
+  .game-fallback-active .center-controls{bottom:3%!important}
+  .game-fallback-active .center-controls button{width:70px!important;height:42px!important}
+  .game-fallback-active .speed-controls{bottom:.6%!important;gap:50px!important}
+  .game-fallback-active .speed-controls button{width:70px!important;height:42px!important}
+}
