@@ -726,3 +726,10 @@
  max-width:none!important;max-height:none!important;margin:0!important;padding:0!important;
  z-index:99999!important;background:#000!important;border-radius:0!important;
 }
+
+/* Page fullscreen must remain scrollable so Fullscreen Game can be reached */
+.page-fallback-fullscreen .app,
+.page-native-fullscreen .app{overflow:auto!important;height:100dvh!important;-webkit-overflow-scrolling:touch!important}
+.page-fallback-fullscreen main,
+.page-native-fullscreen main{min-height:max-content!important}
+.page-native-fullscreen{overflow:auto!important}
