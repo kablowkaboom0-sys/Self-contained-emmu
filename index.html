@@ -11,19 +11,19 @@ function unlockAudio(){
 });$("romPicker").onchange=()=>{const f=$("romPicker").files[0];if(!f)return;currentRomName=f.name;setStatus("Loading "+f.name+"…");gba.loadRomFromFile(f,ok=>{if(!ok){setStatus("Could not load this GBA file.");return}$("pause").disabled=$("reset").disabled=$("save").disabled=$("loadSave").disabled=false;setStatus("Running: "+currentRomName);gba.runStable()})};$("pause").onclick=()=>{if(gba.paused){gba.runStable();$("pause").textContent="Pause";setStatus("Running: "+currentRomName)}else{gba.pause();$("pause").textContent="Resume";setStatus("Paused")}};$("reset").onclick=()=>{gba.pause();gba.reset();$("pause").textContent="Pause";if(currentRomName){gba.runStable();setStatus("Reset: "+currentRomName)}};$("save").onclick=()=>gba.downloadSavedata();$("loadSave").onclick=()=>$("savePicker").click();function setEmuSpeed(ms,label){if(!gba)return;gba.throttle=Math.max(0,Math.min(60,ms));window.__emuThrottle=gba.throttle;setStatus(label+" ("+gba.throttle+"ms frame delay)")}
 let speedHoldTimer=null;
 let speedHoldMode=0;
-let normalThrottle=16;
+let normalSpeedMultiplier=1;
 function beginSpeedHold(mode,e){
  if(e){e.preventDefault();e.stopPropagation();}
  if(!gba)return;
  speedHoldMode=mode;
- normalThrottle=gba.throttle||16;
- gba.throttle=mode===1?8:32;
+ normalSpeedMultiplier=gba.speedMultiplier||1;
+ gba.speedMultiplier=mode===1?2:0.5;
  setStatus(mode===1?"Speed: 200%":"Speed: 50%");
 }
 function endSpeedHold(e){
  if(e){e.preventDefault();e.stopPropagation();}
  if(!gba)return;
- if(speedHoldMode!==0) gba.throttle=normalThrottle;
+ if(speedHoldMode!==0) gba.speedMultiplier=normalSpeedMultiplier;
  speedHoldMode=0;
  clearInterval(speedHoldTimer);
  speedHoldTimer=null;
