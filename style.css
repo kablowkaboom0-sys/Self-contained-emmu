@@ -1981,3 +1981,124 @@ body.mobile-game-active .exit-mobile-game-fullscreen.show{
     max-width:720px!important;
   }
 }
+
+/* Control-style chooser */
+.control-style-picker{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  margin:12px auto 0;
+  max-width:720px;
+  color:#cbd5e1;
+  font-size:14px;
+  font-weight:700;
+}
+.control-style-picker button{
+  border:1px solid #3a4b6c;
+  background:#1b2943;
+  color:#fff;
+  border-radius:9px;
+  padding:8px 13px;
+  font-weight:800;
+  cursor:pointer;
+}
+.control-style-picker button.active{
+  background:#2563eb;
+  border-color:#60a5fa;
+}
+.joystick{display:none}
+body.joystick-mode .dpad{display:none!important}
+body.joystick-mode .joystick{
+  display:block;
+  position:relative;
+  width:170px;
+  height:170px;
+  margin:auto;
+  border-radius:50%;
+  border:3px solid rgba(255,255,255,.55);
+  background:radial-gradient(circle at 50% 45%,rgba(100,116,139,.85),rgba(30,41,59,.92));
+  box-shadow:inset 0 0 0 12px rgba(0,0,0,.16),0 3px 12px rgba(0,0,0,.35);
+  touch-action:none;
+  user-select:none;
+}
+body.joystick-mode .joystick::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:56%;
+  height:56%;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  border:2px solid rgba(255,255,255,.18);
+}
+.joystick-knob{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:70px;
+  height:70px;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  background:rgba(75,85,99,.96);
+  border:2px solid rgba(255,255,255,.72);
+  box-shadow:0 4px 10px rgba(0,0,0,.4);
+  pointer-events:none;
+}
+.joystick.active .joystick-knob{
+  background:rgba(100,116,139,1);
+}
+
+/* Main-screen joystick occupies the D-pad column without changing the rest of the layout. */
+body.joystick-mode .touch-layout .joystick{
+  grid-column:1;
+  grid-row:1;
+}
+
+/* Keep the joystick selector usable in every non-mobile-fullscreen layout. */
+.page-native-fullscreen:not(.nested-game-fullscreen) .control-style-picker,
+.page-fallback-fullscreen:not(.nested-game-fullscreen) .control-style-picker{
+  position:relative;
+  z-index:40;
+  margin:10px auto 0;
+}
+
+/* Game fullscreen: the chosen control type replaces the D-pad in exactly the same area. */
+.game-fallback-active .joystick{
+  position:absolute!important;
+  left:clamp(18px,4vw,42px)!important;
+  bottom:clamp(92px,11dvh,125px)!important;
+  width:clamp(112px,24vw,175px)!important;
+  height:clamp(112px,24vw,175px)!important;
+  margin:0!important;
+  z-index:25!important;
+}
+.game-fallback-active .joystick-knob{
+  width:42%!important;
+  height:42%!important;
+}
+body.joystick-mode .game-fallback-active .dpad{display:none!important}
+body:not(.joystick-mode) .game-fallback-active .joystick{display:none!important}
+
+/* Native mobile fullscreen */
+@media (max-width:600px) and (orientation:portrait){
+  body.mobile-game-active.joystick-mode .player:fullscreen .joystick,
+  body.mobile-game-active.joystick-mode .joystick{
+    display:block!important;
+    position:fixed!important;
+    left:4vw!important;
+    bottom:clamp(125px,16vh,165px)!important;
+    width:36vw!important;
+    height:36vw!important;
+    max-width:165px!important;
+    max-height:165px!important;
+    margin:0!important;
+    z-index:130!important;
+  }
+  body.mobile-game-active.joystick-mode .joystick-knob{
+    width:42%!important;
+    height:42%!important;
+  }
+  body.mobile-game-active.joystick-mode .dpad{display:none!important}
+}
