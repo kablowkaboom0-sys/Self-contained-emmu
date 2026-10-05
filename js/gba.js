@@ -63,7 +63,8 @@ class GameBoyAdvance {
 		this.reportFPS = null;
 		this.debugFrames = 0;
 		this.debugFrameTime = 0;
-		this.throttle = 16; // This is rough, but the 2/3ms difference gives us a good overhead
+		this.throttle = 16; // Legacy frame delay setting
+		this.speedMultiplier = 1; // Playback speed multiplier used by runStable()
 
 		var self = this;
 		window.queueFrame = function (f) {
@@ -194,6 +195,7 @@ class GameBoyAdvance {
 		}
 		var self = this;
 		var frameLength = 1000 / 59.7275;
+		var speedMultiplier = Math.max(0.25, Math.min(4, self.speedMultiplier || 1));
 		var nextFrame = 0;
 		this.paused = false;
 		this.audio.pause(false);
@@ -205,7 +207,7 @@ class GameBoyAdvance {
 				if (now >= nextFrame) {
 					self.advanceFrame();
 					var end = (window.performance && performance.now) ? performance.now() : Date.now();
-					nextFrame += frameLength;
+					nextFrame += frameLength / speedMultiplier;
 					if (nextFrame < end) nextFrame = end;
 				}
 				var delay = Math.max(0, nextFrame - ((window.performance && performance.now) ? performance.now() : Date.now()));
