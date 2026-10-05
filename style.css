@@ -2112,3 +2112,27 @@ body.mobile-game-active .control-style-picker{
 body.joystick-mode .touch-layout .joystick{display:block!important}body.joystick-mode .touch-layout .dpad{display:none!important}body:not(.joystick-mode) .touch-layout .joystick{display:none!important}
 
 .game-fallback-active .joystick{pointer-events:auto!important;touch-action:none!important}.player:fullscreen .joystick{pointer-events:auto!important;touch-action:none!important}
+
+/* FINAL CONTROL-MODE LOCK
+   Exactly one movement control is visible at a time, including mobile fullscreen. */
+body.joystick-mode .touch-layout .dpad,
+body.mobile-game-active.joystick-mode .dpad,
+body.mobile-game-active.joystick-mode .player:fullscreen .dpad,
+body.game-fallback-active.joystick-mode .dpad{
+  display:none!important;
+}
+body:not(.joystick-mode) .touch-layout .joystick,
+body.mobile-game-active:not(.joystick-mode) .joystick,
+body.game-fallback-active:not(.joystick-mode) .joystick{
+  display:none!important;
+}
+body.joystick-mode .touch-layout .joystick,
+body.mobile-game-active.joystick-mode .joystick,
+body.game-fallback-active.joystick-mode .joystick{
+  display:block!important;
+}
+body:not(.joystick-mode) .touch-layout .dpad,
+body.mobile-game-active:not(.joystick-mode) .dpad,
+body.game-fallback-active:not(.joystick-mode) .dpad{
+  display:grid!important;
+}
