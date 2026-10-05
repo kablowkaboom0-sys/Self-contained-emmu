@@ -44,26 +44,44 @@ function keyRelease(n){release(n)}
 document.querySelectorAll("[data-key]").forEach(btn=>{
  const key=btn.dataset.key;
  const down=e=>{
+  if(e.pointerType==="mouse"&&e.button!==0)return;
   if(e.cancelable)e.preventDefault();
   e.stopPropagation();
-  const id=e.pointerId!=null?"p"+e.pointerId:"t"+(e.changedTouches?.[0]?.identifier??"0");
+  const id=e.pointerId;
   activeInputs.set(id,{btn,key});
   keyPress(key);
   btn.classList.add("held");
-  if(e.pointerId!=null){try{btn.setPointerCapture(e.pointerId)}catch(_){}}
+  try{btn.setPointerCapture(e.pointerId)}catch(_){}
  };
  const up=e=>{
   if(e.cancelable)e.preventDefault();
   e.stopPropagation();
-  const id=e.pointerId!=null?"p"+e.pointerId:"t"+(e.changedTouches?.[0]?.identifier??"0");
-  const item=activeInputs.get(id);
-  if(item&&item.btn===btn){keyRelease(item.key);activeInputs.delete(id);btn.classList.remove("held")}
+  const item=activeInputs.get(e.pointerId);
+  if(item&&item.btn===btn){
+   keyRelease(item.key);
+   activeInputs.delete(e.pointerId);
+   btn.classList.remove("held");
+  }
  };
  btn.addEventListener("pointerdown",down,{passive:false});
  btn.addEventListener("pointerup",up,{passive:false});
  btn.addEventListener("pointercancel",up,{passive:false});
- btn.addEventListener("touchstart",down,{passive:false});
- btn.addEventListener("touchend",up,{passive:false});
- btn.addEventListener("touchcancel",up,{passive:false});
+ btn.addEventListener("lostpointercapture",up,{passive:false});
 });
+window.addEventListener("pointerup",e=>{
+ const item=activeInputs.get(e.pointerId);
+ if(item){
+  keyRelease(item.key);
+  item.btn.classList.remove("held");
+  activeInputs.delete(e.pointerId);
+ }
+},{passive:false});
+window.addEventListener("pointercancel",e=>{
+ const item=activeInputs.get(e.pointerId);
+ if(item){
+  keyRelease(item.key);
+  item.btn.classList.remove("held");
+  activeInputs.delete(e.pointerId);
+ }
+},{passive:false});
 document.addEventListener("contextmenu",e=>{if(e.target.closest("[data-key]"))e.preventDefault()});if("serviceWorker"in navigator&&location.protocol!=="file:")navigator.serviceWorker.register("sw.js").catch(()=>{});(function(){const f=$("perfFps"),sp=$("perfSpeed"),fr=$("perfFrame"),vd=$("perfVideo");let last=performance.now(),lastEmu=0;function tick(){const now=(window.performance&&performance.now)?performance.now():Date.now();const elapsed=now-last;if(elapsed>=500){const emu=gba?gba.debugFrames:0;const emuFrames=emu-lastEmu;const fps=emuFrames*1000/elapsed;const speed=fps/59.7275*100;const ft=gba?gba.debugFrameTime:0;const vt=gba?gba.debugVideoTime:0;f.textContent=fps.toFixed(1);sp.textContent=speed.toFixed(0)+"%";fr.textContent=ft?ft.toFixed(1)+" ms":"--";vd.textContent=vt?vt.toFixed(1)+" ms":"--";last=now;lastEmu=emu}requestAnimationFrame(tick)}requestAnimationFrame(tick)})();</script></body></html>
