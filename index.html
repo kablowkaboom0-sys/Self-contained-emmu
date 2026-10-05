@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="theme-color" content="#111827"><title>Self-Contained GBA</title><link rel="stylesheet" href="style.css"><script src="js/util.js"></script><script src="js/core.js"></script><script src="js/arm.js"></script><script src="js/thumb.js"></script><script src="js/mmu.js"></script><script src="js/io.js"></script><script src="js/audio.js"></script><script src="js/video.js"></script><script src="js/video/proxy.js"></script><script src="js/video/software.js"></script><script src="js/irq.js"></script><script src="js/keypad.js"></script><script src="js/sio.js"></script><script src="js/savedata.js"></script><script src="js/gpio.js"></script><script src="js/gba.js"></script><script src="resources/biosbin.js"></script></head><body><div class="app"><header><div></div><label for="romPicker" id="chooseTop" class="primary">Choose .GBA</label><input id="romPicker" class="file-picker" type="file" accept=".gba,application/octet-stream"></header><main><section class="player"><div class="screen-wrap"><canvas id="screen" width="240" height="160"></canvas><div id="perf"><div>FPS: <b id="perfFps">--</b></div><div>Speed: <b id="perfSpeed">--</b></div><div>CPU: <b id="perfFrame">--</b></div><div>Video: <b id="perfVideo">--</b></div></div><div id="status">Choose a GBA game to begin.</div></div><div class="touch-layout" id="touchLayout"><div class="dpad"><button data-key="UP" class="up">▲</button><button data-key="LEFT" class="left">◀</button><button data-key="RIGHT" class="right">▶</button><button data-key="DOWN" class="down">▼</button></div><div class="center-controls"><button data-key="SELECT">SELECT</button><button data-key="START">START</button></div><div class="ab"><button data-key="B" class="b">B</button><button data-key="A" class="a">A</button></div><div class="shoulders"><button data-key="L">L</button><button data-key="R">R</button></div><div class="speed-controls"><button id="fast" type="button">Fast</button><button id="slow" type="button">Slow</button></div></div><button id="toggleTouch" class="toggle-touch" type="button">Hide Controls</button><button id="exitGameFullscreen" class="exit-game-fullscreen" type="button">Exit Fullscreen</button><button id="exitMobileGameFullscreen" class="exit-mobile-game-fullscreen" type="button">Exit Mobile Fullscreen</button><div class="actions"><button id="pause" disabled>Pause</button><button id="reset" disabled>Reset</button><button id="save" disabled>Download Save</button><button id="loadSave" disabled>Load Save</button><input id="savePicker" type="file" accept=".sav,application/octet-stream" hidden><button id="fullscreenPage">Fullscreen Page</button><button id="fullscreenGame">Fullscreen Game</button><button id="fullscreenGameMobile">Fullscreen Game (Mobile)</button></div></section><aside><h2>Controls</h2><p><b>D-pad:</b> Arrow keys</p><p><b>A / B:</b> Z / X</p><p><b>L / R:</b> A / S</p><p><b>Start:</b> Enter</p><p><b>Select:</b> \</p><hr><p class="small">ROMs are selected with your device's file picker and are not uploaded by this page.</p><p class="small">Save data is kept in this browser's local storage when supported.</p></aside></main></div><script>let gba=null,currentRomName="";const $=id=>document.getElementById(id);function setStatus(x){$("status").textContent=x}gba=new GameBoyAdvance();gba.keypad.eatInput=true;gba.setLogger((l,e)=>{console.error(e);setStatus("Emulator error — check the browser console.");gba.pause()});gba.setCanvas($("screen"));gba.logLevel=gba.LOG_ERROR;gba.setBios(biosBin);setStatus("Ready. Choose a .GBA file.");
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="theme-color" content="#111827"><title>Self-Contained GBA</title><link rel="stylesheet" href="style.css"><script src="js/util.js"></script><script src="js/core.js"></script><script src="js/arm.js"></script><script src="js/thumb.js"></script><script src="js/mmu.js"></script><script src="js/io.js"></script><script src="js/audio.js"></script><script src="js/video.js"></script><script src="js/video/proxy.js"></script><script src="js/video/software.js"></script><script src="js/irq.js"></script><script src="js/keypad.js"></script><script src="js/sio.js"></script><script src="js/savedata.js"></script><script src="js/gpio.js"></script><script src="js/gba.js"></script><script src="resources/biosbin.js"></script></head><body><div class="app"><header><div></div><label for="romPicker" id="chooseTop" class="primary">Choose .GBA</label><input id="romPicker" class="file-picker" type="file" accept=".gba,application/octet-stream"></header><main><section class="player"><div class="screen-wrap"><canvas id="screen" width="240" height="160"></canvas><div id="perf"><div>FPS: <b id="perfFps">--</b></div><div>Speed: <b id="perfSpeed">--</b></div><div>CPU: <b id="perfFrame">--</b></div><div>Video: <b id="perfVideo">--</b></div></div><div id="status">Choose a GBA game to begin.</div></div><div class="control-style-picker" id="controlStylePicker"><span>Controls:</span><button id="controlDpad" type="button" class="control-style-option active">D-pad</button><button id="controlJoystick" type="button" class="control-style-option">Joystick</button></div><div class="touch-layout" id="touchLayout"><div class="dpad"><button data-key="UP" class="up">▲</button><button data-key="LEFT" class="left">◀</button><button data-key="RIGHT" class="right">▶</button><button data-key="DOWN" class="down">▼</button></div><div class="joystick" id="joystick" aria-label="Virtual joystick"><div class="joystick-knob" id="joystickKnob"></div></div><div class="center-controls"><button data-key="SELECT">SELECT</button><button data-key="START">START</button></div><div class="ab"><button data-key="B" class="b">B</button><button data-key="A" class="a">A</button></div><div class="shoulders"><button data-key="L">L</button><button data-key="R">R</button></div><div class="speed-controls"><button id="fast" type="button">Fast</button><button id="slow" type="button">Slow</button></div></div><button id="toggleTouch" class="toggle-touch" type="button">Hide Controls</button><button id="exitGameFullscreen" class="exit-game-fullscreen" type="button">Exit Fullscreen</button><button id="exitMobileGameFullscreen" class="exit-mobile-game-fullscreen" type="button">Exit Mobile Fullscreen</button><div class="actions"><button id="pause" disabled>Pause</button><button id="reset" disabled>Reset</button><button id="save" disabled>Download Save</button><button id="loadSave" disabled>Load Save</button><input id="savePicker" type="file" accept=".sav,application/octet-stream" hidden><button id="fullscreenPage">Fullscreen Page</button><button id="fullscreenGame">Fullscreen Game</button><button id="fullscreenGameMobile">Fullscreen Game (Mobile)</button></div></section><aside><h2>Controls</h2><p><b>D-pad:</b> Arrow keys</p><p><b>A / B:</b> Z / X</p><p><b>L / R:</b> A / S</p><p><b>Start:</b> Enter</p><p><b>Select:</b> \</p><hr><p class="small">ROMs are selected with your device's file picker and are not uploaded by this page.</p><p class="small">Save data is kept in this browser's local storage when supported.</p></aside></main></div><script>let gba=null,currentRomName="";const $=id=>document.getElementById(id);function setStatus(x){$("status").textContent=x}gba=new GameBoyAdvance();gba.keypad.eatInput=true;gba.setLogger((l,e)=>{console.error(e);setStatus("Emulator error — check the browser console.");gba.pause()});gba.setCanvas($("screen"));gba.logLevel=gba.LOG_ERROR;gba.setBios(biosBin);setStatus("Ready. Choose a .GBA file.");
 function unlockAudio(){
  const ctx=gba&&gba.audio&&gba.audio.context;
  if(ctx&&ctx.state==="suspended"){
@@ -39,6 +39,63 @@ function bindSpeedButton(id,mode){
 bindSpeedButton("fast",1);
 bindSpeedButton("slow",-1);
 $("savePicker").onchange=()=>{const f=$("savePicker").files[0];if(f){gba.loadSavedataFromFile(f);setStatus("Save loaded.")}};function toggleFullscreen(el,cls){el.classList.add(cls);if(el.requestFullscreen){const p=el.requestFullscreen();if(p&&p.catch)p.catch(()=>{})}}document.addEventListener("fullscreenchange",()=>{const native=!!document.fullscreenElement;document.documentElement.classList.toggle("page-native-fullscreen",native);if(!native){document.documentElement.classList.remove("page-fallback-fullscreen");document.querySelector(".screen-wrap").classList.remove("game-fallback-fullscreen");document.body.classList.remove("game-fallback-active");$("exitGameFullscreen").classList.remove("show")}});$("fullscreenPage").onclick=()=>{if(document.fullscreenElement||document.documentElement.classList.contains("page-fallback-fullscreen")){document.exitFullscreen?.();document.documentElement.classList.remove("page-fallback-fullscreen")}else{toggleFullscreen(document.documentElement,"page-fallback-fullscreen")}};$("fullscreenGame").onclick=(e)=>{e.preventDefault();const el=document.querySelector(".screen-wrap");const active=el.classList.contains("game-fallback-fullscreen");el.classList.toggle("game-fallback-fullscreen",!active);document.body.classList.toggle("game-fallback-active",!active);document.documentElement.classList.toggle("nested-game-fullscreen",!active);$("exitGameFullscreen").classList.toggle("show",!active);if(!active)window.scrollTo(0,0)};function enterMobileGameFullscreen(){const player=document.querySelector(".player");document.body.classList.add("mobile-game-active");$("exitMobileGameFullscreen").classList.add("show");window.scrollTo(0,0);if(player&&player.requestFullscreen){const p=player.requestFullscreen();if(p&&p.catch)p.catch(()=>{})}}function exitMobileGameFullscreen(){document.body.classList.remove("mobile-game-active");$("exitMobileGameFullscreen").classList.remove("show");document.body.classList.remove("touch-hidden");$("toggleTouch").textContent="Hide Controls";if(document.fullscreenElement)document.exitFullscreen?.()}$("fullscreenGameMobile").onclick=(e)=>{e.preventDefault();e.stopPropagation();if(document.body.classList.contains("mobile-game-active"))exitMobileGameFullscreen();else enterMobileGameFullscreen()};$("exitMobileGameFullscreen").onclick=(e)=>{e.preventDefault();e.stopPropagation();exitMobileGameFullscreen()};$("exitGameFullscreen").onclick=()=>{const el=document.querySelector(".screen-wrap");el.classList.remove("game-fallback-fullscreen");document.body.classList.remove("game-fallback-active");document.documentElement.classList.remove("nested-game-fullscreen");document.body.classList.remove("touch-hidden");$("toggleTouch").textContent="Hide Controls";$("exitGameFullscreen").classList.remove("show")};$("toggleTouch").onclick=()=>{const hidden=document.body.classList.toggle("touch-hidden");$("toggleTouch").textContent=hidden?"Show Controls":"Hide Controls"};const bits={A:0,B:1,SELECT:2,START:3,RIGHT:4,LEFT:5,UP:6,DOWN:7,R:8,L:9};function press(n){gba.keypad.currentDown&=~(1<<bits[n])}function release(n){gba.keypad.currentDown|=1<<bits[n]}const activeInputs=new Map();
+let controlMode=localStorage.getItem("gbaControlMode")==="joystick"?"joystick":"dpad";
+function applyControlMode(){
+ document.body.classList.toggle("joystick-mode",controlMode==="joystick");
+ $("controlDpad").classList.toggle("active",controlMode==="dpad");
+ $("controlJoystick").classList.toggle("active",controlMode==="joystick");
+}
+function setControlMode(mode){
+ controlMode=mode==="joystick"?"joystick":"dpad";
+ localStorage.setItem("gbaControlMode",controlMode);
+ applyControlMode();
+}
+$("controlDpad").onclick=()=>setControlMode("dpad");
+$("controlJoystick").onclick=()=>setControlMode("joystick");
+applyControlMode();
+
+const joystick=$("joystick"),joystickKnob=$("joystickKnob");
+const joystickPointers=new Map();
+function joystickRelease(id){
+ const state=joystickPointers.get(id);
+ if(!state)return;
+ keyRelease("UP"); keyRelease("DOWN"); keyRelease("LEFT"); keyRelease("RIGHT");
+ joystickPointers.delete(id);
+ joystickKnob.style.transform="translate(-50%,-50%)";
+ joystick.classList.remove("active");
+}
+function joystickUpdate(e){
+ const r=joystick.getBoundingClientRect();
+ const cx=r.left+r.width/2,cy=r.top+r.height/2;
+ let dx=e.clientX-cx,dy=e.clientY-cy;
+ const max=Math.max(1,r.width*0.31);
+ const len=Math.hypot(dx,dy);
+ if(len>max){dx=dx/len*max;dy=dy/len*max}
+ joystickKnob.style.transform="translate(calc(-50% + "+dx+"px),calc(-50% + "+dy+"px))";
+ const dead=Math.max(8,r.width*0.16);
+ const ax=Math.abs(dx)>dead,ay=Math.abs(dy)>dead;
+ keyRelease("UP"); keyRelease("DOWN"); keyRelease("LEFT"); keyRelease("RIGHT");
+ if(ax) keyPress(dx<0?"LEFT":"RIGHT");
+ if(ay) keyPress(dy<0?"UP":"DOWN");
+}
+joystick.addEventListener("pointerdown",e=>{
+ if(controlMode!=="joystick")return;
+ if(e.cancelable)e.preventDefault();
+ e.stopPropagation();
+ joystickPointers.set(e.pointerId,true);
+ joystick.classList.add("active");
+ try{joystick.setPointerCapture(e.pointerId)}catch(_){}
+ joystickUpdate(e);
+},{passive:false});
+joystick.addEventListener("pointermove",e=>{
+ if(!joystickPointers.has(e.pointerId))return;
+ if(e.cancelable)e.preventDefault();
+ joystickUpdate(e);
+},{passive:false});
+joystick.addEventListener("pointerup",e=>{joystickRelease(e.pointerId)},{passive:false});
+joystick.addEventListener("pointercancel",e=>{joystickRelease(e.pointerId)},{passive:false});
+joystick.addEventListener("lostpointercapture",e=>{joystickRelease(e.pointerId)},{passive:false});
+
 function keyPress(n){press(n)}
 function keyRelease(n){release(n)}
 document.querySelectorAll("[data-key]").forEach(btn=>{
