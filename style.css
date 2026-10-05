@@ -2110,3 +2110,5 @@ body.mobile-game-active .control-style-picker{
 }
 
 body.joystick-mode .touch-layout .joystick{display:block!important}body.joystick-mode .touch-layout .dpad{display:none!important}body:not(.joystick-mode) .touch-layout .joystick{display:none!important}
+
+.game-fallback-active .joystick{pointer-events:auto!important;touch-action:none!important}.player:fullscreen .joystick{pointer-events:auto!important;touch-action:none!important}
