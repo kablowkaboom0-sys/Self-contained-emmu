@@ -2108,3 +2108,5 @@ body:not(.joystick-mode) .game-fallback-active .joystick{display:none!important}
 body.mobile-game-active .control-style-picker{
   display:none!important;
 }
+
+body.joystick-mode .touch-layout .joystick{display:block!important}body.joystick-mode .touch-layout .dpad{display:none!important}body:not(.joystick-mode) .touch-layout .joystick{display:none!important}
