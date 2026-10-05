@@ -2102,3 +2102,9 @@ body:not(.joystick-mode) .game-fallback-active .joystick{display:none!important}
   }
   body.mobile-game-active.joystick-mode .dpad{display:none!important}
 }
+
+/* The selector is a normal-page option; fullscreen keeps the selected mode without covering the game. */
+.game-fallback-active .control-style-picker,
+body.mobile-game-active .control-style-picker{
+  display:none!important;
+}
