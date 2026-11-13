@@ -2148,3 +2148,13 @@ body.game-fallback-active:not(.joystick-mode) .dpad{
 #saveTransferText{display:block;width:100%;min-height:190px;max-height:48dvh;resize:vertical;background:#080c16;color:#e2e8f0;border:1px solid #3a4b6c;border-radius:10px;padding:12px;font:12px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace;overflow-wrap:anywhere}
 .save-transfer-actions{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end;margin-top:12px}
 #saveTransferStatus{min-height:18px;margin-bottom:0}
+
+
+/* FINAL HIDE-CONTROLS OVERRIDE
+   Keep the Show/Hide button available while hiding the complete touch controller
+   in normal view, page fullscreen, game fullscreen, and mobile fullscreen. */
+body.touch-hidden .app .player .touch-layout{
+  display:none!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+}
